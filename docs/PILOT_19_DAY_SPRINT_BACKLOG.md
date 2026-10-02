@@ -25,7 +25,7 @@ Week 4 (Days 16–19) ───> Integration Tests, Dockerization, Final Present
 * **Objective:** Establish a repeatable, clean developer workstation.
 * **Tasks:**
   - Install .NET 10 SDK and Docker Desktop / Docker Engine.
-  - Clone repository and navigate to `sandbox/SputnikDevs.Residence.SandboxApi/`.
+  - Clone sandbox repository (`https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git`) and navigate to `SputnikDevs.Residence.SandboxApi/`.
   - Spin up local PostgreSQL 16 container via `docker compose up -d`.
   - Verify database connectivity using `docker ps` and connection string in `appsettings.Development.json`.
 * **Deliverable:** First test build with `dotnet build` passing with 0 errors.
