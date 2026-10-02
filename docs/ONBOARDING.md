@@ -26,33 +26,34 @@ Before writing code, ensure your development machine has the following tools ins
 
 ---
 
-## 2. Project Isolation Strategy: The Residence Sandbox
+## 2. Project Isolation Strategy: Standalone Sandbox Repository
 
-To protect production databases and allow you to learn, experiment, and break things safely, all internship engineering takes place in our dedicated **Student Residence Sandbox**:
+To protect production databases and allow you to learn, experiment, and break things safely, all internship engineering takes place in a **completely separate, dedicated repository**:
 
-* **Sandbox Directory:** `sandbox/SputnikDevs.Residence.SandboxApi/`
-* **Sandbox Solution:** `sandbox/SputnikDevs.Residence.Sandbox.sln`
+* **Repository URL:** `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git`
+* **Sandbox Solution:** `SputnikDevs.Residence.Sandbox.sln`
+* **API Project:** `SputnikDevs.Residence.SandboxApi/`
 * **Database Target:** Local PostgreSQL 16 container (or SQLite fallback)
 
 > [!IMPORTANT]
 > **Production Safety Guarantee:** 
-> The Sandbox is completely decoupled from the Sputnik Devs production environment (`SputnikDevsWeb`). It requires **zero production secrets** and has **zero access to live databases**. You can run migrations, drop tables, and experiment locally with zero risk to client workloads.
+> The Sandbox repository is completely decoupled from the Sputnik Devs corporate web platform (`SputnikDevsCompanyWebApp`). Interns are given contributor access **only** to the sandbox repository. It requires **zero production secrets** and has **zero access to live databases**. You can run migrations, drop tables, and experiment locally with zero risk to client workloads.
 
 ---
 
 ## 3. Step-by-Step Local Setup
 
-### Step 3.1: Clone the Repository
+### Step 3.1: Clone the Standalone Sandbox Repository
 ```bash
-git clone https://github.com/Sputnik-Devs-Pty-Ltd/SputnikDevsCompanyWebApp.git
-cd SputnikDevsCompanyWebApp
+git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
+cd sputnikdevs-residence-sandbox
 ```
 
 ### Step 3.2: Start the Local PostgreSQL Database
 We provide a pre-configured Docker Compose file that spins up an isolated PostgreSQL 16 instance on port **5433** (preventing collisions with any default Postgres instances you may have):
 
 ```bash
-cd sandbox/SputnikDevs.Residence.SandboxApi
+cd SputnikDevs.Residence.SandboxApi
 docker compose up -d
 ```
 
