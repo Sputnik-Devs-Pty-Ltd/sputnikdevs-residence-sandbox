@@ -1,0 +1,35 @@
+## Visual Studio & .NET Core
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+.vscode/
+*.suo
+*.userprefs
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Environment & Secrets
+appsettings.Development.json
+appsettings.Local.json
+*.local.json
+.env
+.env.local
+
+## OS Files
+.DS_Store
+Thumbs.db
