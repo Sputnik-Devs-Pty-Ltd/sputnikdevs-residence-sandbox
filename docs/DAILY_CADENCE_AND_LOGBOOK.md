@@ -57,7 +57,7 @@ Every morning, post your standup in the dedicated studio channel using this exac
 
 | Day # | Date | Hours | Focus Area / Module | Summary of Technical Tasks Performed | Git Commit / PR Link | Mentor Sign-Off |
 | :---: | :---: | :---: | :--- | :--- | :--- | :---: |
-| **01** | Day 1 | 8h | Onboarding & Tooling | Configured local .NET 10 SDK, Git, Docker, and cloned repository. Initialized local PostgreSQL 16 container via Docker Compose. Verified Swagger endpoint at `http://localhost:5035`. | `commit: a1b2c3d` | Approved [TM] |
+| **01** | Day 1 | 8h | Onboarding & Tooling | Configured cloud development workspace via GitHub Codespaces (.NET 10). Initialized sandbox API with built-in SQLite database and verified Swagger endpoint at `http://localhost:5035`. | `PR / Commit` | Approved [TM] |
 | **02** | Day 2 | 8h | Git & Branching Hygiene | Studied Conventional Commits and feature-branch workflows. Scaffolding branch `feature/wil-brian-init`. Created initial PR and reviewed feedback on git commit structure. | `PR #1` | Approved [TM] |
 | **03** | Day 3 | 8h | Domain Modeling | Built C# domain models: `BaseEntity`, `Student`, `Room`, `MaintenanceTicket`, and `TicketComment`. Enforced strong typing with enums (`TicketCategory`, `TicketPriority`, `TicketStatus`). | `PR #2` | Approved [KK] |
 | **04** | Day 4 | 8h | EF Core & Relational Mapping | Configured `SandboxDbContext` using Fluent API. Set up primary keys, foreign keys, cascade delete rules, and string length constraints. Created initial EF Core migration. | `PR #3` | Approved [TM] |

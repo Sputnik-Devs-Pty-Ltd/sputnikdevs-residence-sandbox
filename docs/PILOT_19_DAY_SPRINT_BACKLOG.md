@@ -21,19 +21,20 @@ Week 4 (Days 16–19) ───> Integration Tests, Dockerization, Final Present
 
 ### Week 1: Foundations, Relational Modeling & Database Setup
 
-#### Day 01: Local Environment & Docker Postgres Setup
-* **Objective:** Establish a repeatable, clean developer workstation.
+#### Day 01: Cloud Environment Setup & First API Run
+* **Objective:** Establish a repeatable, clean developer workspace with zero laptop strain.
 * **Tasks:**
-  - Install .NET 10 SDK and Docker Desktop / Docker Engine.
-  - Clone sandbox repository (`https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git`) and navigate to `SputnikDevs.Residence.SandboxApi/`.
-  - Spin up local PostgreSQL 16 container via `docker compose up -d`.
-  - Verify database connectivity using `docker ps` and connection string in `appsettings.Development.json`.
-* **Deliverable:** First test build with `dotnet build` passing with 0 errors.
+  - Launch your workspace via **GitHub Codespaces** (Option A — recommended) or clone locally with .NET 10 (Option B).
+  - Study [ONBOARDING.md](ONBOARDING.md) and [AI_USAGE_POLICY.md](AI_USAGE_POLICY.md).
+  - Run the API in the terminal: `dotnet run --project SputnikDevs.Residence.SandboxApi`.
+  - Verify that the SQLite database auto-creates and seeds sample rooms, students, and tickets.
+  - Open Swagger UI at `http://localhost:5035/` and test `GET /api/v1/tickets`.
+* **Deliverable:** First successful run verified in Swagger UI with 0 errors.
 
 #### Day 02: Git Hygiene & Branching Conventions
 * **Objective:** Master professional Git feature-branch workflows.
 * **Tasks:**
-  - Study [ONBOARDING.md](file:///home/sputniktech/repos/Sputnikdevsclients/docs/internship/ONBOARDING.md) and [AI_USAGE_POLICY.md](file:///home/sputniktech/repos/Sputnikdevsclients/docs/internship/AI_USAGE_POLICY.md).
+  - Review [ONBOARDING.md](ONBOARDING.md) Git conventions.
   - Create personal working branch: `feature/wil-brian-init`.
   - Practice authoring Conventional Commits (`docs(wil): ...`, `feat(sandbox): ...`).
 * **Deliverable:** Submit PR #1 adding student profile to the internship logbook.
@@ -178,7 +179,7 @@ Week 4 (Days 16–19) ───> Integration Tests, Dockerization, Final Present
 * **Tasks:**
   - Conduct static analysis code audit (remove unused usings, simplify LINQ).
   - Ensure zero compiler warnings across all projects.
-  - Finalize daily logbook entries in [DAILY_CADENCE_AND_LOGBOOK.md](file:///home/sputniktech/repos/Sputnikdevsclients/docs/internship/DAILY_CADENCE_AND_LOGBOOK.md).
+  - Finalize daily logbook entries in [DAILY_CADENCE_AND_LOGBOOK.md](DAILY_CADENCE_AND_LOGBOOK.md).
 * **Deliverable:** PR #17 containing final code refactoring and cleanups.
 
 #### Day 19: Final Technical Presentation & Program Exit Defense
@@ -188,6 +189,6 @@ Week 4 (Days 16–19) ───> Integration Tests, Dockerization, Final Present
     1. Architecture overview & database schema.
     2. Live API walkthrough in Swagger / Postman.
     3. Code defense: Explain 3 technical challenges overcome during the sprint.
-  - Mentors score summative exit defense on [EVALUATION_RUBRIC.md](file:///home/sputniktech/repos/Sputnikdevsclients/docs/internship/EVALUATION_RUBRIC.md).
-  - Sign off on final institutional logbook and issue [COMPLETION_VERIFICATION_LETTER_TEMPLATE.md](file:///home/sputniktech/repos/Sputnikdevsclients/docs/internship/COMPLETION_VERIFICATION_LETTER_TEMPLATE.md).
+  - Mentors score summative exit defense on [EVALUATION_RUBRIC.md](EVALUATION_RUBRIC.md).
+  - Sign off on final institutional logbook and issue official verification credential on `sputnikdevs.com/academy/verify`.
 * **Deliverable:** Formal completion of the Sputnik Devs Studio WIL Pilot Program!
