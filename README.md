@@ -8,21 +8,25 @@ This standalone repository serves as the hands-on engineering sandbox for junior
 
 > [!TIP]
 > ### ⚡ One-Click Cloud Development with GitHub Codespaces (Recommended)
-> **No installations required. Zero strain on your laptop's RAM.**  
-> Everything (.NET 10 SDK, C# Dev Kit, and dependencies) is pre-configured in GitHub's cloud environment.
->
+> **Never used Codespaces before? Don't worry!**  
+> GitHub Codespaces gives you a dedicated high-performance Linux computer in the cloud, displayed right inside your web browser. 
+> 
+> * ❌ **Do you need to install .NET SDK?** **No.** .NET 10 is already pre-installed in the cloud container.
+> * ❌ **Do you need to install Docker or PostgreSQL?** **No.** The project uses built-in SQLite by default. No background database servers or Docker Desktop needed.
+> * ❌ **Will your laptop freeze?** **No.** All building and running happens on GitHub's cloud servers (8 GB RAM). Your laptop only runs a lightweight browser tab.
+> 
 > [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox)
 >
 > **How to launch in 3 easy steps:**
 > 1. Click the **"Open in GitHub Codespaces"** badge above (or click the green **`<> Code`** button at the top-right of this page ➔ **Codespaces** tab ➔ **Create codespace on main**).
-> 2. Once the VS Code editor opens in your web browser, open the terminal (press `` Ctrl + ` `` or click **Terminal ➔ New Terminal**).
+> 2. Wait ~30 seconds for your cloud editor to boot. Open the integrated terminal (press `` Ctrl + ` `` or click **Terminal ➔ New Terminal**).
 > 3. Run the API:
 >    ```bash
 >    dotnet run --project SputnikDevs.Residence.SandboxApi
 >    ```
-> 4. VS Code will automatically detect port `5035` and show a prompt: *"Your application running on port 5035 is available. Open in Browser"*. Click **Open in Browser** to view the interactive **Swagger UI**!
+> 4. VS Code will detect port `5035` and show a prompt: *"Your application running on port 5035 is available. Open in Browser"*. Click **Open in Browser** to view the interactive **Swagger UI**!
 >
-> That's it! You are ready to start coding without worrying about memory limits or local database configuration.
+> That's it! You are ready to start coding without installing anything on your laptop.
 
 ---
 

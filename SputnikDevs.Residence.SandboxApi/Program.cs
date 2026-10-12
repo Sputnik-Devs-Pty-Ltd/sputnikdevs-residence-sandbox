@@ -14,8 +14,8 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
-// 2. Database Provider Configuration (PostgreSQL by default, SQLite fallback for zero-dependency local dev)
-var databaseProvider = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "PostgreSQL";
+// 2. Database Provider Configuration (SQLite by default for zero-dependency dev, PostgreSQL optional)
+var databaseProvider = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "Sqlite";
 
 builder.Services.AddDbContext<SandboxDbContext>(options =>
 {

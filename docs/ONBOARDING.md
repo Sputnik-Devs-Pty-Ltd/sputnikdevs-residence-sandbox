@@ -37,21 +37,26 @@ To protect production databases and allow you to learn, experiment, and break th
 
 ### 🚀 Option A: GitHub Codespaces (Zero Setup, Zero Laptop Load — Recommended)
 
-This runs the entire development environment, compiler, and database in GitHub's cloud Linux environment. It uses virtually zero RAM on your laptop and will not cause freezes.
+This runs your entire development environment inside a high-speed Linux container in GitHub's cloud. It uses virtually zero RAM on your laptop (only a browser tab) and will completely prevent system freezes.
+
+> [!NOTE]
+> **Never used GitHub Codespaces before?**
+> You don't need to install anything on your laptop or inside Codespaces:
+> * **.NET 10 SDK:** Already pre-installed.
+> * **C# Dev Kit & VS Code:** Runs automatically inside your browser with all C# extensions ready.
+> * **Docker:** **NOT required.**
+> * **PostgreSQL:** **NOT required.** The sandbox uses built-in SQLite by default, which initializes and seeds automatically.
 
 1. In your browser, navigate to the repository:
    👉 `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox`
-2. Click the green **`<> Code`** button and select the **Codespaces** tab.
+2. Click the green **`<> Code`** button and select the **Codespaces** tab (or click the badge in `README.md`).
 3. Click **Create codespace on main**.
-4. A full VS Code editor will open right in your web browser. The pre-installed container includes:
-   - .NET 10 SDK
-   - C# Dev Kit extensions
-   - Automatic background `dotnet restore`
-5. In the built-in terminal (Press ``Ctrl + ` ``), start the API:
+4. A full VS Code editor will open right in your web browser. 
+5. In the built-in terminal (Press ``Ctrl + ` `` or **Terminal ➔ New Terminal**), start the API:
    ```bash
    dotnet run --project SputnikDevs.Residence.SandboxApi
    ```
-6. VS Code will detect port `5035` and display a popup: *"Open in Browser"*. Click it to immediately view the interactive **Swagger UI**!
+6. VS Code will detect port `5035` and display a popup: *"Your application running on port 5035 is available. Open in Browser"*. Click it to immediately view the interactive **Swagger UI**!
 
 ---
 
