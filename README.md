@@ -6,28 +6,39 @@ This standalone repository serves as the hands-on engineering sandbox for junior
 
 ---
 
+> [!TIP]
+> ### ⚡ One-Click Cloud Development with GitHub Codespaces (Recommended)
+> **No installations required. Zero strain on your laptop's RAM.**  
+> Everything (.NET 10 SDK, C# Dev Kit, and dependencies) is pre-configured in GitHub's cloud environment.
+>
+> [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox)
+>
+> **How to launch in 3 easy steps:**
+> 1. Click the **"Open in GitHub Codespaces"** badge above (or click the green **`<> Code`** button at the top-right of this page ➔ **Codespaces** tab ➔ **Create codespace on main**).
+> 2. Once the VS Code editor opens in your web browser, open the terminal (press `` Ctrl + ` `` or click **Terminal ➔ New Terminal**).
+> 3. Run the API:
+>    ```bash
+>    dotnet run --project SputnikDevs.Residence.SandboxApi
+>    ```
+> 4. VS Code will automatically detect port `5035` and show a prompt: *"Your application running on port 5035 is available. Open in Browser"*. Click **Open in Browser** to view the interactive **Swagger UI**!
+>
+> That's it! You are ready to start coding without worrying about memory limits or local database configuration.
+
+---
+
 ## 🎯 Purpose & Scope
 
 * **Pilot Intern:** Brian Mkandla (19-Day Intensive WIL Sprint)
 * **Institutional Partner:** Rosebank College / Academic HEIs
 * **Focus Discipline:** Backend & Cloud Architecture (Track 01)
-* **Core Tech Stack:** C# 12, ASP.NET Core Web API (.NET 10), Entity Framework Core, PostgreSQL, Docker, Swagger / OpenAPI.
+* **Core Tech Stack:** C# 12, ASP.NET Core Web API (.NET 10), Entity Framework Core, SQLite (default) / PostgreSQL, Docker, Swagger / OpenAPI.
 
 ---
 
-## 🚀 Quickstart Guide
+## 🚀 Development Options
 
-### Option A: Cloud Development with GitHub Codespaces (Recommended — Zero Laptop Load)
-If your laptop has limited RAM (e.g. 4 GB) or you want to start immediately without installing SDKs or databases:
-1. Click the green **`<> Code`** button at the top of this GitHub repository.
-2. Select the **Codespaces** tab.
-3. Click **Create codespace on main**.
-4. GitHub will automatically spin up a dedicated cloud Linux container with .NET 10, C# Dev Kit, and dependencies pre-installed.
-5. In the terminal, run:
-   ```bash
-   dotnet run --project SputnikDevs.Residence.SandboxApi
-   ```
-6. The interactive Swagger UI will automatically open in a browser tab!
+### Option A: GitHub Codespaces (Cloud)
+*(See the [⚡ One-Click Cloud Development](#-one-click-cloud-development-with-github-codespaces-recommended) section above).*
 
 ---
 
