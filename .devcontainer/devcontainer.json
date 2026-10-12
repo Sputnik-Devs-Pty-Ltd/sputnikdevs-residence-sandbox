@@ -1,0 +1,32 @@
+{
+  "name": "Sputnik Devs Residence Sandbox (.NET 10)",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0-noble",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.vscode-dotnet-runtime"
+      ],
+      "settings": {
+        "dotnet.defaultSolution": "SputnikDevs.Residence.Sandbox.sln"
+      }
+    }
+  },
+  "forwardPorts": [5035, 7190],
+  "portsAttributes": {
+    "5035": {
+      "label": "Sandbox API (Swagger UI)",
+      "onAutoForward": "openBrowser"
+    },
+    "7190": {
+      "label": "Sandbox API HTTPS",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "dotnet restore SputnikDevs.Residence.Sandbox.sln",
+  "remoteUser": "vscode"
+}

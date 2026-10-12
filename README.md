@@ -17,27 +17,31 @@ This standalone repository serves as the hands-on engineering sandbox for junior
 
 ## 🚀 Quickstart Guide
 
-### 1. Prerequisites
-Ensure you have the following installed on your local machine:
+### Option A: Cloud Development with GitHub Codespaces (Recommended — Zero Laptop Load)
+If your laptop has limited RAM (e.g. 4 GB) or you want to start immediately without installing SDKs or databases:
+1. Click the green **`<> Code`** button at the top of this GitHub repository.
+2. Select the **Codespaces** tab.
+3. Click **Create codespace on main**.
+4. GitHub will automatically spin up a dedicated cloud Linux container with .NET 10, C# Dev Kit, and dependencies pre-installed.
+5. In the terminal, run:
+   ```bash
+   dotnet run --project SputnikDevs.Residence.SandboxApi
+   ```
+6. The interactive Swagger UI will automatically open in a browser tab!
+
+---
+
+### Option B: Local Machine Development
+
+#### 1. Prerequisites (If developing locally)
 * [.NET 10 SDK](https://dotnet.microsoft.com/download)
-* [Docker Desktop](https://www.docker.com/) or local PostgreSQL 16+
 * [Git](https://git-scm.com/)
-* Recommended IDE: JetBrains Rider, VS Code (with C# Dev Kit), or Visual Studio 2022+
+* Recommended Editor: VS Code (with *C# Dev Kit* extension)
 
-### 2. Local Database Setup (Docker)
-Start a dedicated local PostgreSQL instance with one command:
+#### 2. Run Instantly with Built-In SQLite (Zero Setup Required)
+The repository is pre-configured to use SQLite by default so you can run without Docker or local database services:
 ```bash
-docker run --name sputnik-residence-sandbox-db \
-  -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=postgres \
-  -e POSTGRES_DB=residence_sandbox_db \
-  -p 5433:5432 \
-  -d postgres:16-alpine
-```
-
-### 3. Build & Run the API
-```bash
-# Clone this repository
+# Clone the repository
 git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
 cd sputnikdevs-residence-sandbox
 
@@ -45,13 +49,23 @@ cd sputnikdevs-residence-sandbox
 dotnet restore
 dotnet build
 
-# Apply Initial Migrations & Run
-cd SputnikDevs.Residence.SandboxApi
-dotnet run
+# Run the API
+dotnet run --project SputnikDevs.Residence.SandboxApi
 ```
+
 Once running, navigate to:
-* **Interactive Swagger UI:** `http://localhost:5055/swagger`
-* **Health Endpoint:** `http://localhost:5055/health`
+* **Interactive Swagger UI:** `http://localhost:5035/`
+* The API will automatically seed test rooms, students, and tickets into a local SQLite database file.
+
+#### 3. Optional: Using PostgreSQL with Docker
+If you want to practice with PostgreSQL:
+1. Set `"DatabaseProvider": "PostgreSQL"` in `SputnikDevs.Residence.SandboxApi/appsettings.Development.json`.
+2. Start the database container:
+   ```bash
+   cd SputnikDevs.Residence.SandboxApi
+   docker compose up -d
+   ```
+3. Run the API as usual.
 
 ---
 

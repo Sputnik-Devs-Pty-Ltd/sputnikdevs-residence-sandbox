@@ -6,23 +6,15 @@ Our engineering culture values **clean architecture**, **rigorous version contro
 
 ---
 
-## 1. Prerequisites & Tooling Installation
+## 1. Development Environment Options
 
-Before writing code, ensure your development machine has the following tools installed:
+We support two primary development environments. **If your machine has 4 GB RAM or freezes when running heavy software, use Option A (Codespaces).**
 
-| Tool | Recommended Version | Verification Command | Installation Link |
+| Environment | Machine Requirement | Setup Effort | Recommended For |
 | :--- | :--- | :--- | :--- |
-| **.NET SDK** | .NET 10.0 (or .NET 8.0 LTS) | `dotnet --version` | [dot.net/download](https://dotnet.microsoft.com/download) |
-| **Git** | 2.40+ | `git --version` | [git-scm.com](https://git-scm.com/) |
-| **Docker & Docker Compose** | Docker Desktop / Docker Engine | `docker --version` | [docker.com](https://www.docker.com/) |
-| **Code Editor** | VS Code, Visual Studio 2022, or JetBrains Rider | — | [code.visualstudio.com](https://code.visualstudio.com/) |
-| **API Client** | Postman, Bruno, or VS Code REST Client | — | Optional (Swagger UI included) |
-
-### Recommended VS Code Extensions
-- **C# Dev Kit** (`ms-dotnettools.csdevkit`)
-- **C#** (`ms-dotnettools.csharp`)
-- **Docker** (`ms-azuretools.vscode-docker`)
-- **GitLens** (`eamodio.gitlens`)
+| **Option A: GitHub Codespaces** | Any laptop (even 2–4 GB RAM), web browser only | **0 min** (Instant cloud VM) | **⭐ Recommended** (Zero laptop freezing) |
+| **Option B: Local Machine (SQLite)** | 4 GB+ RAM, .NET 10 SDK | **5 min** (No Docker needed) | Offline or local VS Code work |
+| **Option C: Local Machine (Docker + Postgres)** | 8–16 GB RAM, Docker Desktop | **10 min** | Deep local DevOps practice |
 
 ---
 
@@ -33,53 +25,79 @@ To protect production databases and allow you to learn, experiment, and break th
 * **Repository URL:** `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git`
 * **Sandbox Solution:** `SputnikDevs.Residence.Sandbox.sln`
 * **API Project:** `SputnikDevs.Residence.SandboxApi/`
-* **Database Target:** Local PostgreSQL 16 container (or SQLite fallback)
+* **Database Target:** Built-in SQLite (Default, zero setup) or Local PostgreSQL 16 container
 
 > [!IMPORTANT]
 > **Production Safety Guarantee:** 
-> The Sandbox repository is completely decoupled from the Sputnik Devs corporate web platform (`SputnikDevsCompanyWebApp`). Interns are given contributor access **only** to the sandbox repository. It requires **zero production secrets** and has **zero access to live databases**. You can run migrations, drop tables, and experiment locally with zero risk to client workloads.
+> The Sandbox repository is completely decoupled from the Sputnik Devs corporate web platform (`SputnikDevsCompanyWebApp`) and client eCommerce tiers. Interns are given contributor access **only** to this sandbox repository. It requires **zero production secrets** and has **zero access to live databases**. You can run migrations, drop tables, and experiment with zero risk to client workloads.
 
 ---
 
-## 3. Step-by-Step Local Setup
+## 3. Step-by-Step Setup
 
-### Step 3.1: Clone the Standalone Sandbox Repository
-```bash
-git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
-cd sputnikdevs-residence-sandbox
-```
+### 🚀 Option A: GitHub Codespaces (Zero Setup, Zero Laptop Load — Recommended)
 
-### Step 3.2: Start the Local PostgreSQL Database
-We provide a pre-configured Docker Compose file that spins up an isolated PostgreSQL 16 instance on port **5433** (preventing collisions with any default Postgres instances you may have):
+This runs the entire development environment, compiler, and database in GitHub's cloud Linux environment. It uses virtually zero RAM on your laptop and will not cause freezes.
 
-```bash
-cd SputnikDevs.Residence.SandboxApi
-docker compose up -d
-```
+1. In your browser, navigate to the repository:
+   👉 `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox`
+2. Click the green **`<> Code`** button and select the **Codespaces** tab.
+3. Click **Create codespace on main**.
+4. A full VS Code editor will open right in your web browser. The pre-installed container includes:
+   - .NET 10 SDK
+   - C# Dev Kit extensions
+   - Automatic background `dotnet restore`
+5. In the built-in terminal (Press ``Ctrl + ` ``), start the API:
+   ```bash
+   dotnet run --project SputnikDevs.Residence.SandboxApi
+   ```
+6. VS Code will detect port `5035` and display a popup: *"Open in Browser"*. Click it to immediately view the interactive **Swagger UI**!
 
-Verify that the database container is healthy:
-```bash
-docker ps --filter "name=sputnik_sandbox_postgres"
-```
+---
 
-*(Optional SQLite Fallback):* If you are working on a machine where Docker cannot run, simply edit `appsettings.Development.json` and set `"DatabaseProvider": "Sqlite"`. The API will automatically create a local `residence_sandbox.db` file with zero configuration.
+### 💻 Option B: Local Machine Setup with SQLite (Lightweight, No Docker)
 
-### Step 3.3: Build the Solution
-```bash
-dotnet build ../SputnikDevs.Residence.Sandbox.sln
-```
+If you prefer to work locally on your laptop without Docker Desktop:
 
-### Step 3.4: Launch the API
-```bash
-dotnet run
-```
+1. **Install Prerequisites:**
+   - [.NET 10 SDK](https://dotnet.microsoft.com/download)
+   - [Git](https://git-scm.com/)
+   - [VS Code](https://code.visualstudio.com/) with the **C# Dev Kit** extension.
+2. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
+   cd sputnikdevs-residence-sandbox
+   ```
+3. **Build the solution:**
+   ```bash
+   dotnet build SputnikDevs.Residence.Sandbox.sln
+   ```
+4. **Run the API:**
+   ```bash
+   dotnet run --project SputnikDevs.Residence.SandboxApi
+   ```
+   *(The API defaults to SQLite, automatically generating and seeding `residence_sandbox.db` in seconds without running any heavy background containers).*
+5. Open your browser to:
+   👉 **`http://localhost:5035/`**
 
-When the application boots:
-1. It automatically runs `DbInitializer.SeedAsync()` to create the schema and populate mock students, rooms, and tickets.
-2. The interactive **Swagger UI** will be available at:
-   👉 **`http://localhost:5035/`** (or the port displayed in your terminal).
+---
 
-Open that URL in your browser to verify that the sample endpoints (`GET /api/v1/tickets`) respond with `200 OK`!
+### 🐳 Option C: Local PostgreSQL with Docker (Optional for 8GB+ RAM Machines)
+
+If your machine has ample RAM (8 GB or more) and you want to practice with PostgreSQL:
+1. Edit `SputnikDevs.Residence.SandboxApi/appsettings.Development.json` and set:
+   ```json
+   "DatabaseProvider": "PostgreSQL"
+   ```
+2. Start the isolated PostgreSQL container:
+   ```bash
+   cd SputnikDevs.Residence.SandboxApi
+   docker compose up -d
+   ```
+3. Run the API:
+   ```bash
+   dotnet run
+   ```
 
 ---
 
