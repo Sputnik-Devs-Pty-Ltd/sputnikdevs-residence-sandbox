@@ -1,9 +1,9 @@
 # Sputnik Devs Studio — Daily Cadence & WIL Logbook Template
 
-**Student Name:** Brian Mkandla (Pilot) / Intern Cohort  
-**Institution:** Rosebank College (or Partner Higher Education Institution)  
-**Program:** Work-Integrated Learning (WIL) / Software Development Placement  
-**Mentors:** Takudzwa Mupanesure, Kenneth Katsande, Prince (Lwazi Mthunzi)  
+**Student Name:** Brian Mkandla
+**Institution:** Richfield Graduate Institute of Technology
+**Program:** Work-Integrated Learning (WIL) / Software Development Placement
+**Mentors:** Takudzwa Mupanesure, Kenneth Katsande, Prince (Lwazi Mthunzi)
 
 ---
 
@@ -50,7 +50,7 @@ Every morning, post your standup in the dedicated studio channel using this exac
 *(Interns must update this logbook daily. At the end of the sprint, this table forms the official submission verified and stamped for college credit).*
 
 ### Placement Metadata
-* **Student Number:** `[Student ID]`
+* **Student Number:** 402311213
 * **Placement Start Date:** `2026-10-02`
 * **Placement End Date:** `2026-10-28`
 * **Target Hours:** 152 Hours (19 Working Days × 8 Hours/Day)
