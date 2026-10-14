@@ -1,9 +1,9 @@
 # Sputnik Devs Studio — Daily Cadence & WIL Logbook Template
 
-**Student Name:** Brian Mkandla
-**Institution:** Richfield Graduate Institute of Technology
-**Program:** Work-Integrated Learning (WIL) / Software Development Placement
-**Mentors:** Takudzwa Mupanesure, Kenneth Katsande, Prince (Lwazi Mthunzi)
+* **Student Name:** Brian Mkandla
+* **Institution:** Richfield Graduate Institute of Technology
+* **Program:** Work-Integrated Learning (WIL) / Software Development Placement
+* **Mentors:** Takudzwa Mupanesure, Kenneth Katsande, Prince (Lwazi Mthunzi)
 
 ---
 
