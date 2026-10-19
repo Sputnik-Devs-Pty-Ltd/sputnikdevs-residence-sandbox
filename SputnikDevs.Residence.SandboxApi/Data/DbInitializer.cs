@@ -22,8 +22,15 @@ public static class DbInitializer
     /// </returns>
     public static async Task SeedAsync(SandboxDbContext context)
     {
-        // Ensure database schema is created
-        await context.Database.EnsureCreatedAsync();
+        // Ensure database schema is created (apply EF Core migrations for PostgreSQL, or EnsureCreated for SQLite)
+        if (context.Database.IsNpgsql())
+        {
+            await context.Database.MigrateAsync();
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
 
         // Checks whether any room exists.
         if (await context.Rooms.AnyAsync())
@@ -160,9 +167,9 @@ public static class DbInitializer
 
         ticket4.Comments.Add(new TicketComment
         {
-           AuthorName = "Thabo",
-           AuthorRole = "Technician",
-           Content = "Inspection scheduled to check the air filter and cooling system."
+            AuthorName = "Thabo",
+            AuthorRole = "Technician",
+            Content = "Inspection scheduled to check the air filter and cooling system."
         });
 
         var ticket5 = new MaintenanceTicket
@@ -179,9 +186,9 @@ public static class DbInitializer
 
         ticket5.Comments.Add(new TicketComment
         {
-           AuthorName = "Amina Khumalo",
-           AuthorRole = "Student",
-           Content = "Ants have been appearing near the kitchen cupboards. The area has been cleaned but they keep returning."
+            AuthorName = "Amina Khumalo",
+            AuthorRole = "Student",
+            Content = "Ants have been appearing near the kitchen cupboards. The area has been cleaned but they keep returning."
         });
 
         var ticket6 = new MaintenanceTicket
@@ -199,16 +206,16 @@ public static class DbInitializer
 
         ticket6.Comments.Add(new TicketComment
         {
-           AuthorName = "Brian Mkandla",
-           AuthorRole = "Student",
-           Content = "The chair became unstable while I was using it to study. I stopped using it to avoid injury."
+            AuthorName = "Brian Mkandla",
+            AuthorRole = "Student",
+            Content = "The chair became unstable while I was using it to study. I stopped using it to avoid injury."
         });
 
         ticket6.Comments.Add(new TicketComment
         {
-           AuthorName = "Muzi",
-           AuthorRole = "Technician",
-           Content = "Will inspect the chair and determine whether the leg can be repaired or the chair needs replacement."
+            AuthorName = "Muzi",
+            AuthorRole = "Technician",
+            Content = "Will inspect the chair and determine whether the leg can be repaired or the chair needs replacement."
         });
 
         // Save all tickets and their comments.

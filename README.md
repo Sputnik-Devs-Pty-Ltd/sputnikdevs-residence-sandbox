@@ -72,15 +72,17 @@ Once running, navigate to:
 * **Interactive Swagger UI:** `http://localhost:5035/`
 * The API will automatically seed test rooms, students, and tickets into a local SQLite database file.
 
-#### 3. Optional: Using PostgreSQL with Docker
-If you want to practice with PostgreSQL:
-1. Set `"DatabaseProvider": "PostgreSQL"` in `SputnikDevs.Residence.SandboxApi/appsettings.Development.json`.
-2. Start the database container:
-   ```bash
-   cd SputnikDevs.Residence.SandboxApi
-   docker compose up -d
-   ```
-3. Run the API as usual.
+#### 3. Optional: Using PostgreSQL 16 (Codespaces or Local Docker)
+If you want to run and test against live PostgreSQL 16:
+* **In GitHub Codespaces:** Simply run `./scripts/start-postgres.sh` and follow the **[Codespaces PostgreSQL 16 Guide](docs/CODESPACES_POSTGRES_GUIDE.md)**.
+* **On Local Machine with Docker:**
+  1. Set `"DatabaseProvider": "Postgres"` in `SputnikDevs.Residence.SandboxApi/appsettings.Development.json`.
+  2. Start the database container:
+     ```bash
+     cd SputnikDevs.Residence.SandboxApi
+     docker compose up -d
+     ```
+  3. Run the API as usual.
 
 ---
 
@@ -89,10 +91,11 @@ If you want to practice with PostgreSQL:
 Before opening your first Pull Request, you **must** read and adhere to our engineering standards located in the `docs/` directory:
 
 1. **[Developer Onboarding Guide](docs/ONBOARDING.md):** Git workflow, branch conventions, PR templates, and local dev setup.
-2. **[AI-Assisted Coding Policy](docs/AI_USAGE_POLICY.md):** Guidelines for using AI tools (GitHub Copilot, ChatGPT, Claude) ethically and productively while ensuring full line-by-line code comprehension.
-3. **[Daily Cadence & Logbook Template](docs/DAILY_CADENCE_AND_LOGBOOK.md):** Daily check-ins, PR milestones, and supervisor sign-offs.
-4. **[19-Day Pilot Sprint Backlog](docs/PILOT_19_DAY_SPRINT_BACKLOG.md):** Daily milestone breakdown from Day 1 to Day 19.
-5. **[Evaluation Rubric](docs/EVALUATION_RUBRIC.md):** How your code hygiene, architecture, and oral defense will be assessed.
+2. **[Codespaces PostgreSQL 16 Guide](docs/CODESPACES_POSTGRES_GUIDE.md):** How to launch PostgreSQL 16, apply EF Core migrations, and inspect tables with `psql` inside GitHub Codespaces.
+3. **[AI-Assisted Coding Policy](docs/AI_USAGE_POLICY.md):** Guidelines for using AI tools (GitHub Copilot, ChatGPT, Claude) ethically and productively while ensuring full line-by-line code comprehension.
+4. **[Daily Cadence & Logbook Template](docs/DAILY_CADENCE_AND_LOGBOOK.md):** Daily check-ins, PR milestones, and supervisor sign-offs.
+5. **[19-Day Pilot Sprint Backlog](docs/PILOT_19_DAY_SPRINT_BACKLOG.md):** Daily milestone breakdown from Day 1 to Day 19.
+6. **[Evaluation Rubric](docs/EVALUATION_RUBRIC.md):** How your code hygiene, architecture, and oral defense will be assessed.
 
 ---
 

@@ -1,8 +1,9 @@
 {
-  "name": "Sputnik Devs Residence Sandbox (.NET 10)",
+  "name": "Sputnik Devs Residence Sandbox (.NET 10 + PostgreSQL 16)",
   "image": "mcr.microsoft.com/devcontainers/dotnet:10.0-noble",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
     "vscode": {
@@ -16,7 +17,7 @@
       }
     }
   },
-  "forwardPorts": [5035, 7190],
+  "forwardPorts": [5035, 7190, 5433],
   "portsAttributes": {
     "5035": {
       "label": "Sandbox API (Swagger UI)",
@@ -25,8 +26,13 @@
     "7190": {
       "label": "Sandbox API HTTPS",
       "onAutoForward": "silent"
+    },
+    "5433": {
+      "label": "PostgreSQL 16 (residence_sandbox_db)",
+      "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "dotnet restore SputnikDevs.Residence.Sandbox.sln",
+  "postCreateCommand": "dotnet restore SputnikDevs.Residence.Sandbox.sln && bash ./scripts/start-postgres.sh",
+  "postStartCommand": "bash ./scripts/start-postgres.sh",
   "remoteUser": "vscode"
 }
