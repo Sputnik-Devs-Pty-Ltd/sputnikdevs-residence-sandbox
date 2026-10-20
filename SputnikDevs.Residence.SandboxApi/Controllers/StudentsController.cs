@@ -17,6 +17,24 @@ public class StudentsController : ControllerBase
         _context = context;
     }
 
+    private static StudentDto MapToDto(Student s) =>
+        new (
+            s.Id,
+            s.StudentNumber,
+            s.FirstName,
+            s.LastName,
+            s.FullName,
+            s.Email,
+            s.PhoneNumber,
+            s.RoomId,
+            s.Room?.RoomNumber,
+            s.Room?.BuildingName
+        );
+
+    /// <summary>
+    /// Retrieves all students in the database.
+    /// </summary>
+    /// <returns>Returns a 200 OK response.</returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<StudentDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<StudentDto>>> GetStudents()
@@ -24,23 +42,21 @@ public class StudentsController : ControllerBase
         var students = await _context.Students
             .Include(s => s.Room)
             .AsNoTracking()
-            .Select(s => new StudentDto(
-                s.Id,
-                s.StudentNumber,
-                s.FirstName,
-                s.LastName,
-                s.FullName,
-                s.Email,
-                s.PhoneNumber,
-                s.RoomId,
-                s.Room != null ? s.Room.RoomNumber : null,
-                s.Room != null ? s.Room.BuildingName : null
-            ))
             .ToListAsync();
 
-        return Ok(students);
+        var studentsDto = students.Select(s => MapToDto(s));
+
+        return Ok(studentsDto);
     }
 
+    /// <summary>
+    /// Retrieves a student by their unique ID.
+    /// </summary>
+    /// <param name="id">Represents the student's unique ID.</param>
+    /// <returns>
+    /// Returns the student record if found.
+    /// Returns 404 Not Found if it doesn't exist.
+    /// </returns>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(StudentDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -54,18 +70,7 @@ public class StudentsController : ControllerBase
         if (student == null)
             return NotFound(new { message = $"Student with ID '{id}' was not found." });
 
-        return Ok(new StudentDto(
-            student.Id,
-            student.StudentNumber,
-            student.FirstName,
-            student.LastName,
-            student.FullName,
-            student.Email,
-            student.PhoneNumber,
-            student.RoomId,
-            student.Room?.RoomNumber,
-            student.Room?.BuildingName
-        ));
+        return Ok(MapToDto(student));
     }
 
     [HttpPost]
@@ -93,17 +98,6 @@ public class StudentsController : ControllerBase
         _context.Students.Add(student);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, new StudentDto(
-            student.Id,
-            student.StudentNumber,
-            student.FirstName,
-            student.LastName,
-            student.FullName,
-            student.Email,
-            student.PhoneNumber,
-            student.RoomId,
-            null,
-            null
-        ));
+        return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, MapToDto(student));
     }
 }
