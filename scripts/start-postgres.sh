@@ -48,11 +48,18 @@ fi
 
 # 4. Configure user password, create database if missing, and set ~/.pgpass for passwordless psql
 echo "[4/4] Verifying user '${PG_USER}' and database '${PG_DB}'..."
-(cd /tmp && sudo -u postgres psql -p "${PG_PORT}" -c "ALTER USER ${PG_USER} WITH PASSWORD '${PG_PASS}';" >/dev/null)
+# In GitHub Codespaces (Ubuntu 24.04 Noble), /etc/sudoers.d/vscode defaults to ALL=(root) NOPASSWD:ALL,
+# which allows passwordless `sudo` as root but prompts for a password on `sudo -u postgres`.
+# Upgrade sudoers to ALL=(ALL:ALL) and use `sudo runuser -u postgres --` so Step 4 never prompts for a password.
+if [ -f /etc/sudoers.d/vscode ]; then
+    sudo sed -i 's/ALL=(root)/ALL=(ALL:ALL)/g' /etc/sudoers.d/vscode 2>/dev/null || true
+fi
 
-DB_EXISTS=$(cd /tmp && sudo -u postgres psql -p "${PG_PORT}" -tAc "SELECT 1 FROM pg_database WHERE datname='${PG_DB}'")
+(cd /tmp && sudo runuser -u postgres -- psql -p "${PG_PORT}" -c "ALTER USER ${PG_USER} WITH PASSWORD '${PG_PASS}';" >/dev/null)
+
+DB_EXISTS=$(cd /tmp && sudo runuser -u postgres -- psql -p "${PG_PORT}" -tAc "SELECT 1 FROM pg_database WHERE datname='${PG_DB}'")
 if [ "$DB_EXISTS" != "1" ]; then
-    (cd /tmp && sudo -u postgres psql -p "${PG_PORT}" -c "CREATE DATABASE ${PG_DB} OWNER ${PG_USER};" >/dev/null)
+    (cd /tmp && sudo runuser -u postgres -- psql -p "${PG_PORT}" -c "CREATE DATABASE ${PG_DB} OWNER ${PG_USER};" >/dev/null)
     echo "      Created database '${PG_DB}'."
 else
     echo "      Database '${PG_DB}' already exists."
