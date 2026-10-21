@@ -2,6 +2,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SputnikDevs.Residence.SandboxApi.DTOs;
 
+/// <summary>
+/// Represents student information returned by the API.
+/// </summary>
+/// <param name="Id"></param>
+/// <param name="StudentNumber"></param>
+/// <param name="FirstName"></param>
+/// <param name="LastName"></param>
+/// <param name="FullName"></param>
+/// <param name="Email"></param>
+/// <param name="PhoneNumber"></param>
+/// <param name="RoomId"></param>
+/// <param name="RoomNumber"></param>
+/// <param name="BuildingName"></param>
 public record StudentDto(
     Guid Id,
     string StudentNumber,
@@ -15,6 +28,15 @@ public record StudentDto(
     string? BuildingName
 );
 
+/// <summary>
+/// Contains the information required to register a student.
+/// </summary>
+/// <param name="StudentNumber"></param>
+/// <param name="FirstName"></param>
+/// <param name="LastName"></param>
+/// <param name="Email"></param>
+/// <param name="PhoneNumber"></param>
+/// <param name="RoomId"></param>
 public record CreateStudentDto(
     [Required] [MaxLength(50)] string StudentNumber,
     [Required] [MaxLength(100)] string FirstName,
@@ -24,6 +46,18 @@ public record CreateStudentDto(
     Guid? RoomId
 );
 
+/// <summary>
+/// Represents the room information and occupancy details returned by the API.
+/// </summary>
+/// <param name="Id"></param>
+/// <param name="BuildingName"></param>
+/// <param name="RoomNumber"></param>
+/// <param name="Floor"></param>
+/// <param name="Capacity"></param>
+/// <param name="CurrentOccupancy"></param>
+/// <param name="AvailableSpots"></param>
+/// <param name="IsOccupied"></param>
+/// <param name="ActiveTicketsCount"></param>
 public record RoomDto(
     Guid Id,
     string BuildingName,
@@ -31,6 +65,7 @@ public record RoomDto(
     int Floor,
     int Capacity,
     int CurrentOccupancy,
+    int AvailableSpots,
     bool IsOccupied,
     int ActiveTicketsCount
 );

@@ -224,6 +224,7 @@ public class TicketsController : ControllerBase
             t.Category,
             t.Priority,
             t.Status,
+            t.IsClosedOrResolved,
             t.StudentId,
             t.Student?.FullName ?? "Unknown",
             t.RoomId,
