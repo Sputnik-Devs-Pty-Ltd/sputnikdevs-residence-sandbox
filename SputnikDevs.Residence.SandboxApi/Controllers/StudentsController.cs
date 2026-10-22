@@ -86,7 +86,7 @@ public class StudentsController : ControllerBase
             return BadRequest(new { message = $"Student number '{dto.StudentNumber}' is already registered." });
 
         var room = await _context.Rooms
-             .FirstOrDefaultAsync(r => r.Id == dto.Room);
+             .FirstOrDefaultAsync(r => r.Id == dto.RoomId);
 
         if (room is null)
         {
