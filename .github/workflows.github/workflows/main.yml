@@ -1,3 +1,5 @@
+# This workflow builds the Student Residence Sandbox API
+
 name: .NET API CI
 
 on:
