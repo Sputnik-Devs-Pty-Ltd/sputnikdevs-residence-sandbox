@@ -85,6 +85,25 @@ public class StudentsController : ControllerBase
         if (existingNumber)
             return BadRequest(new { message = $"Student number '{dto.StudentNumber}' is already registered." });
 
+        var room = await _context.Rooms
+             .FirstOrDefaultAsync(r => r.Id == dto.Room);
+
+        if (room is null)
+        {
+            return BadRequest(new
+            {
+                message = $"Room '{dto.RoomId}' does not exist."
+            }
+        }
+
+        if (room.AvailableSpots <= 0)
+        {
+            return BadRequest(new
+            {
+                message = $"Room '{dto.RoomId}' has no available spots."
+            });
+        }
+
         var student = new Student
         {
             StudentNumber = dto.StudentNumber.Trim(),
