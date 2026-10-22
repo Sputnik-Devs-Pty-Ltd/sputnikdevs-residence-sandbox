@@ -55,8 +55,8 @@ public record MaintenanceTicketDto(
 public record CreateMaintenanceTicketDto(
     [Required] [MaxLength(200)] string Title,
     [Required] [MaxLength(2000)] string Description,
-    [Required] TicketCategory Category,
-    [Required] TicketPriority Priority,
+    [Required] [EnumDataType(typeof(TicketCategory))] TicketCategory Category,
+    [Required] [EnumDataType(typeof(TicketPriority))] TicketPriority Priority,
     [Required] Guid StudentId,
     [Required] Guid RoomId
 );
