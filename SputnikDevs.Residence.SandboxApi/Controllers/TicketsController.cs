@@ -134,6 +134,14 @@ public class TicketsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<MaintenanceTicketDto>> UpdateStatus(Guid id, [FromBody] UpdateTicketStatusDto dto)
     {
+        if (!Enum.IsDefined(typeof(TicketStatus), dto.Status)
+        {
+            return BadRequest(new
+            {
+                message = $"'{dto.Status}' is not valid in ticket status."
+            });
+        }
+
         var ticket = await _context.MaintenanceTickets
             .Include(t => t.Student)
             .Include(t => t.Room)
@@ -153,7 +161,11 @@ public class TicketsController : ControllerBase
 
         if (dto.Status == TicketStatus.Resolved || dto.Status == TicketStatus.Closed)
         {
-            ticket.ResolvedAtUtc ??= DateTime.UtcNow;
+            ticket.ResolvedAtUtc = DateTime.UtcNow;
+        }
+        else
+        {
+            ticket.ResolvedAtUtc = DateTime.UtcNow;
         }
 
         await _context.SaveChangesAsync();
