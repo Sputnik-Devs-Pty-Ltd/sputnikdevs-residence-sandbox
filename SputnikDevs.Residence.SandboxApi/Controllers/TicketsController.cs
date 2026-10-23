@@ -161,7 +161,11 @@ public class TicketsController : ControllerBase
 
         if (dto.Status == TicketStatus.Resolved || dto.Status == TicketStatus.Closed)
         {
-            ticket.ResolvedAtUtc ??= DateTime.UtcNow;
+            ticket.ResolvedAtUtc = DateTime.UtcNow;
+        }
+        else
+        {
+            ticket.ResolvedAtUtc = null;
         }
 
         await _context.SaveChangesAsync();
