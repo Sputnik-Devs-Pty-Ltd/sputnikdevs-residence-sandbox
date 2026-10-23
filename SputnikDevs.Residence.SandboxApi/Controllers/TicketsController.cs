@@ -134,7 +134,7 @@ public class TicketsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<MaintenanceTicketDto>> UpdateStatus(Guid id, [FromBody] UpdateTicketStatusDto dto)
     {
-        if (!Enum.IsDefined(typeof(TicketStatus), dto.Status)
+        if (!Enum.IsDefined(typeof(TicketStatus), dto.Status))
         {
             return BadRequest(new
             {
@@ -165,7 +165,7 @@ public class TicketsController : ControllerBase
         }
         else
         {
-            ticket.ResolvedAtUtc = DateTime.UtcNow;
+            ticket.ResolvedAtUtc = null;
         }
 
         await _context.SaveChangesAsync();
