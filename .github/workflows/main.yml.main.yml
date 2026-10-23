@@ -1,11 +1,10 @@
-# This workflow builds the Student Residence Sandbox API
-
 name: .NET API CI
 
 on:
   push:
     branches:
-      - feature/wil-brian-request-validation
+      - main
+      - 'feature/**'
   pull_request:
     branches:
       - main
