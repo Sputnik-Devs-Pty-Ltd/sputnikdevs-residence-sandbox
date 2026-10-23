@@ -85,23 +85,28 @@ public class StudentsController : ControllerBase
         if (existingNumber)
             return BadRequest(new { message = $"Student number '{dto.StudentNumber}' is already registered." });
 
-        var room = await _context.Rooms
-             .FirstOrDefaultAsync(r => r.Id == dto.RoomId);
+        Room? room = null;
 
-        if (room is null)
+        if (dto.RoomId.HasValue)
         {
-            return BadRequest(new
+            room = await _context.Rooms
+                 .FirstOrDefaultAsync(r => r.Id == dto.RoomId);
+
+            if (room is null)
             {
-                message = $"Room '{dto.RoomId}' does not exist."
+                return BadRequest(new
+                {
+                    message = $"Room '{dto.RoomId}' does not exist."
+                }
             }
-        }
 
-        if (room.AvailableSpots <= 0)
-        {
-            return BadRequest(new
+            if (room.AvailableSpots <= 0)
             {
-                message = $"Room '{dto.RoomId}' has no available spots."
-            });
+                return BadRequest(new
+                {
+                    message = $"Room '{dto.RoomId}' has no available spots."
+                });
+            }
         }
 
         var student = new Student
@@ -113,6 +118,8 @@ public class StudentsController : ControllerBase
             PhoneNumber = dto.PhoneNumber?.Trim() ?? string.Empty,
             RoomId = dto.RoomId
         };
+
+        student.Room = room;
 
         _context.Students.Add(student);
         await _context.SaveChangesAsync();
