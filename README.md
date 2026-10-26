@@ -1,8 +1,17 @@
-# Sputnik Devs Academy — Student Residence Sandbox API
+# Sputnik Devs Academy™ — Unified Student Residence WIL Sandbox
 
-Welcome to the **Sputnik Devs Academy & Work-Integrated Learning (WIL) Sandbox Project**.
+Welcome to the **Sputnik Devs Academy™ Multi-Disciplinary Work-Integrated Learning (WIL) Sandbox Platform**.
 
-This standalone repository serves as the hands-on engineering sandbox for junior developers, interns, and WIL students at Sputnik Devs Studio (Pty) Ltd. It mirrors the real-world domain and architectural patterns of the **Sputnik Devs Student Residence Management System**, but operates in complete isolation from our commercial production databases and proprietary business infrastructure.
+This repository serves as the unified hands-on engineering, data, and AI sandbox for Work-Integrated Learning (WIL) students, learnership candidates, and junior interns at **Sputnik Devs Studio (Pty) Ltd** (`Reg: 2025/656647/07`). It mirrors the real-world domain and architectural patterns of the **Sputnik Devs Student Residence Management Ecosystem (Varsnik & Resnik)** while operating in complete isolation from commercial production databases and proprietary client infrastructure.
+
+---
+
+> [!IMPORTANT]
+> ### 🎓 Student WIL Portal & Daily Standup Logbook
+> Every enrolled student receives an official **Student Portal Access Code (`SD-PORTAL-XXXX`)** upon placement approval.
+> * **Student Portal & Daily Logbook:** [https://sputnikdevs.com/academy/portal](https://sputnikdevs.com/academy/portal)
+> * **Apply for WIL Placement:** [https://sputnikdevs.com/academy/apply](https://sputnikdevs.com/academy/apply)
+> * **Verify Official Certificates & Transcripts:** [https://sputnikdevs.com/academy/verify](https://sputnikdevs.com/academy/verify)
 
 ---
 
@@ -11,112 +20,76 @@ This standalone repository serves as the hands-on engineering sandbox for junior
 > **Never used Codespaces before? Don't worry!**  
 > GitHub Codespaces gives you a dedicated high-performance Linux computer in the cloud, displayed right inside your web browser. 
 > 
-> * ❌ **Do you need to install .NET SDK?** **No.** .NET 10 is already pre-installed in the cloud container.
-> * ❌ **Do you need to install Docker or PostgreSQL?** **No.** The project uses built-in SQLite by default. No background database servers or Docker Desktop needed.
+> * ❌ **Do you need to install .NET SDK or Python?** **No.** .NET 10, PostgreSQL 16 client tools, and Python 3 are pre-installed in the cloud container.
+> * ❌ **Do you need to install Docker or PostgreSQL locally?** **No.** The project uses built-in SQLite by default and includes a 1-command PostgreSQL 16 script inside Codespaces.
 > * ❌ **Will your laptop freeze?** **No.** All building and running happens on GitHub's cloud servers (8 GB RAM). Your laptop only runs a lightweight browser tab.
 > 
 > [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox)
 >
-> **How to launch in 3 easy steps:**
-> 1. Click the **"Open in GitHub Codespaces"** badge above (or click the green **`<> Code`** button at the top-right of this page ➔ **Codespaces** tab ➔ **Create codespace on main**).
-> 2. Wait ~30 seconds for your cloud editor to boot. Open the integrated terminal (press `` Ctrl + ` `` or click **Terminal ➔ New Terminal**).
-> 3. Run the API:
+> **How to launch in 4 easy steps:**
+> 1. **Fork this repository** to your personal GitHub account using the **Fork** button at the top-right of GitHub (so you have your own personal sandbox copy!).
+> 2. Click **Code ➔ Codespaces ➔ Create codespace on main** inside your fork (or click the badge above).
+> 3. Wait ~30 seconds for your cloud editor to boot. Open the integrated terminal (press `` Ctrl + ` ``) and run:
 >    ```bash
 >    dotnet run --project SputnikDevs.Residence.SandboxApi
 >    ```
 > 4. VS Code will detect port `5035` and show a prompt: *"Your application running on port 5035 is available. Open in Browser"*. Click **Open in Browser** to view the interactive **Swagger UI**!
->
-> That's it! You are ready to start coding without installing anything on your laptop.
 
 ---
 
-## 🎯 Purpose & Scope
+## 🏛️ Institutional Cohort Pods & Mentorship Structure
 
-* **Pilot Intern:** Brian Mkandla (19-Day Intensive WIL Sprint)
-* **Institutional Partner:** Rosebank College / Academic HEIs
-* **Focus Discipline:** Backend & Cloud Architecture (Track 01)
-* **Core Tech Stack:** C# 12, ASP.NET Core Web API (.NET 10), Entity Framework Core, SQLite (default) / PostgreSQL, Docker, Swagger / OpenAPI.
+To ensure every student receives daily support and structured feedback, cohorts are organized into dedicated **Institutional Pods**:
 
----
-
-## 🚀 Development Options
-
-### Option A: GitHub Codespaces (Cloud)
-*(See the [⚡ One-Click Cloud Development](#-one-click-cloud-development-with-github-codespaces-recommended) section above).*
+| Cohort Pod | Partner Institution | Pod Coordinator (Daily Standups & Gate 3 Oral Defense) | Principal Engineer (Gate 4 Architecture & Batch Merge) |
+| :--- | :--- | :--- | :--- |
+| **Pod Alpha (`POD-ALPHA-RICHFIELD`)** | **Richfield Graduate Institute of Technology** | **Kenneth Takudzwa Katsande** (`kennethtk@sputnikdevs.com`) | **Takudzwa Mupanesure** (`sputnikdevs@sputnikdevs.com`) |
+| **Pod Bravo (`POD-BRAVO-ROSEBANK`)** | **IIE Rosebank College** | **Prince Lwazi Nkiwane** (`princeln@sputnikdevs.com`) | **Takudzwa Mupanesure** (`sputnikdevs@sputnikdevs.com`) |
 
 ---
 
-### Option B: Local Machine Development
+## 🧭 5 Specialization Tracks on One Unified Codebase
 
-#### 1. Prerequisites (If developing locally)
-* [.NET 10 SDK](https://dotnet.microsoft.com/download)
-* [Git](https://git-scm.com/)
-* Recommended Editor: VS Code (with *C# Dev Kit* extension)
+Students from different academic streams work on the **same Student Residence Sandbox domain** (`Rooms`, `Students`, `MaintenanceTickets`) through specialized engineering tracks:
 
-#### 2. Run Instantly with Built-In SQLite (Zero Setup Required)
-The repository is pre-configured to use SQLite by default so you can run without Docker or local database services:
-```bash
-# Clone the repository
-git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
-cd sputnikdevs-residence-sandbox
-
-# Restore & Build
-dotnet restore
-dotnet build
-
-# Run the API
-dotnet run --project SputnikDevs.Residence.SandboxApi
-```
-
-Once running, navigate to:
-* **Interactive Swagger UI:** `http://localhost:5035/`
-* The API will automatically seed test rooms, students, and tickets into a local SQLite database file.
-
-#### 3. Optional: Using PostgreSQL 16 (Codespaces or Local Docker)
-If you want to run and test against live PostgreSQL 16:
-* **In GitHub Codespaces:** Simply run `./scripts/start-postgres.sh` and follow the **[Codespaces PostgreSQL 16 Guide](docs/CODESPACES_POSTGRES_GUIDE.md)**.
-* **On Local Machine with Docker:**
-  1. Set `"DatabaseProvider": "Postgres"` in `SputnikDevs.Residence.SandboxApi/appsettings.Development.json`.
-  2. Start the database container:
-     ```bash
-     cd SputnikDevs.Residence.SandboxApi
-     docker compose up -d
-     ```
-  3. Run the API as usual.
+| Track Code | Specialization Track | Primary Tech Stack | Workspace Folder | Track Syllabus |
+| :--- | :--- | :--- | :--- | :--- |
+| **Track 01** | **Backend & Cloud API Engineering** | C# 12, ASP.NET Core Web API (.NET 10), EF Core, PostgreSQL 16, xUnit | `SputnikDevs.Residence.SandboxApi/` | **[TRACK_01_BACKEND.md](docs/tracks/TRACK_01_BACKEND.md)** |
+| **Track 02** | **Frontend & Modern Web UI Engineering** | HTML5, Tailwind/Bootstrap 5, Modern JS (`fetch`), Razor/Blazor UI | `frontend/` | **[TRACK_02_FRONTEND_UI.md](docs/tracks/TRACK_02_FRONTEND_UI.md)** |
+| **Track 03** | **Database Administration & Data Engineering** | PostgreSQL 16, DDL Constraints, Composite Indexes, SQL Views, CSV ETL | `database/` | **[TRACK_03_DATABASE_SQL.md](docs/tracks/TRACK_03_DATABASE_SQL.md)** |
+| **Track 04** | **Big Data, BI & Data Science** | Python 3, Pandas, SQL Analytics, SLA Telemetry, Executive KPI Dashboards | `analytics/` | **[TRACK_04_BIG_DATA_BI.md](docs/tracks/TRACK_04_BIG_DATA_BI.md)** |
+| **Track 05** | **Applied AI & Intelligent Automation** | Python/C# NLP Ticket Triage, Sentiment Analysis, RAG FAQ Assistant | `ai-agents/` | **[TRACK_05_APPLIED_AI.md](docs/tracks/TRACK_05_APPLIED_AI.md)** |
 
 ---
 
-## 📚 Essential Reading for Interns
+## ⏳ 1-Month, 3-Month & 6-Month Progressive WIL Pathways
 
-Before opening your first Pull Request, you **must** read and adhere to our engineering standards located in the `docs/` directory:
+Whether your college requires a **19-Day Intensive Sprint (152h)**, a **3-Month Semester WIL Placement (480h)**, or a **6-Month National Diploma / Degree WIL Internship (960h)**, our staged rotation model scales seamlessly:
 
-1. **[Developer Onboarding Guide](docs/ONBOARDING.md):** Git workflow, branch conventions, PR templates, and local dev setup.
-2. **[Codespaces PostgreSQL 16 Guide](docs/CODESPACES_POSTGRES_GUIDE.md):** How to launch PostgreSQL 16, apply EF Core migrations, and inspect tables with `psql` inside GitHub Codespaces.
-3. **[AI-Assisted Coding Policy](docs/AI_USAGE_POLICY.md):** Guidelines for using AI tools (GitHub Copilot, ChatGPT, Claude) ethically and productively while ensuring full line-by-line code comprehension.
-4. **[Daily Cadence & Logbook Template](docs/DAILY_CADENCE_AND_LOGBOOK.md):** Daily check-ins, PR milestones, and supervisor sign-offs.
-5. **[19-Day Pilot Sprint Backlog](docs/PILOT_19_DAY_SPRINT_BACKLOG.md):** Daily milestone breakdown from Day 1 to Day 19.
-6. **[Evaluation Rubric](docs/EVALUATION_RUBRIC.md):** How your code hygiene, architecture, and oral defense will be assessed.
+* **Stage 1 — Core Track Mastery (Month 1 / Days 1–19 / 152 Hours):** Complete the 19 daily milestones and oral code defense in your primary track. *(1-Month WIL students graduate at the end of Stage 1).*
+* **Stage 2 — Cross-Disciplinary Track Rotation & Pod Capstone (Months 2–3 / 480 Hours Cumulative):** Rotate into a **Secondary Track** in Month 2, then collaborate across Backend, Frontend, Database, Data Science, and AI in a Month 3 Pod Capstone & Live Staging QA/UAT Sprint. *(3-Month WIL students graduate at the end of Stage 2).*
+* **Stage 3 — Senior WIL Associate, Peer Teaching Assistant (TA) & R&D Sprint (Months 4–6 / 960 Hours Cumulative):** Rotate into a **3rd Track**, serve as a **Peer Teaching Assistant (Gate 2 PR Reviewer)** for incoming Stage 1 students, and deliver an advanced R&D automation capstone. *(6-Month WIL students graduate at the end of Stage 3).*
+* 👉 Read the full **[Stage 2 & Stage 3 Rotation Guide](docs/STAGE_2_AND_3_ROTATION_GUIDE.md)**.
 
 ---
 
-## 🛡️ Git Workflow & PR Standards
+## 📚 Essential Reading for All Students
 
-* **Main Branch is Protected:** Never push directly to `main`.
-* **Branch Naming Standard:**
-  * `feature/day-01-environment-setup`
-  * `feature/day-04-issues-endpoints`
-  * `fix/room-allocation-logic`
-* **Pull Request Requirements:**
-  * Each PR must address a specific daily backlog task.
-  * Must compile with 0 warnings/errors.
-  * Must pass automated checks.
-  * Requires review and sign-off from designated mentor (**Takudzwa Mupanesure**, **Kenneth Katsande**, or **Prince**).
+Before submitting your first Pull Request, read the documentation in `docs/`:
+
+1. **[Developer Onboarding & Fork Workflow](docs/ONBOARDING.md):** How to fork the repo, name branches, pass the 4-Gate review pipeline, and log daily check-ins.
+2. **[Codespaces PostgreSQL 16 Guide](docs/CODESPACES_POSTGRES_GUIDE.md):** How to launch PostgreSQL 16, apply EF Core migrations, and inspect tables with `psql`.
+3. **[AI-Assisted Coding Policy](docs/AI_USAGE_POLICY.md):** How to use AI tools ethically while preparing for your Coordinator's daily 2-question Oral Code Defense.
+4. **[Daily Cadence & Logbook Template](docs/DAILY_CADENCE_AND_LOGBOOK.md):** Daily standup format, peer review rules, and university logbook export.
+5. **[19-Day Pilot Sprint Backlog (Track 01)](docs/PILOT_19_DAY_SPRINT_BACKLOG.md):** Detailed daily reference for Backend API tasks.
+6. **[Stage 2 & 3 Multi-Month Rotation Guide](docs/STAGE_2_AND_3_ROTATION_GUIDE.md):** Guide for 3-Month and 6-Month WIL placements.
+7. **[Evaluation Rubric](docs/EVALUATION_RUBRIC.md):** How the 4-Pillar Engineering Competency Rubric is scored on your final Transcript.
 
 ---
 
-## 🏢 Academic & Company Verification
+## 🏅 Cryptographically Signed Certificates & Official Academic Transcripts
 
-Upon successful completion of the sprint and passing the 30-minute oral code defense, an official verifiable credential will be issued by Sputnik Devs Studio and logged at:
-`https://sputnikdevs.com/academy/verify`
+Upon completing your required WIL hours and passing the oral code defense, Sputnik Devs Studio issues an **Encrypted, QR-Verifiable Digital Completion Certificate + Official WIL Academic Transcript** (with Company Seal & 4-Pillar Competency Breakdown), permanently verifiable at:
+👉 **[https://sputnikdevs.com/academy/verify](https://sputnikdevs.com/academy/verify)**
 
 &copy; 2026 Sputnik Devs Studio (Pty) Ltd. Johannesburg, South Africa.

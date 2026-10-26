@@ -1,184 +1,98 @@
-# Sputnik Devs Studio — Internship & WIL Engineering Onboarding Guide
+# Sputnik Devs Studio — Multi-College WIL Engineering Onboarding Guide
 
-Welcome to **Sputnik Devs Studio**. You are joining our engineering team as part of the **Work-Integrated Learning (WIL) & Engineering Internship Program**. 
+Welcome to **Sputnik Devs Studio (Pty) Ltd**. You are joining our engineering organization as part of the **Sputnik Devs Academy™ Work-Integrated Learning (WIL) & Engineering Internship Program**.
 
-Our engineering culture values **clean architecture**, **rigorous version control**, and **deep technical comprehension**. This document walks you through setting up your local environment, understanding our repository conventions, and shipping your first pull request.
+Our engineering culture values **clean architecture**, **rigorous version control**, **peer collaboration**, and **deep line-by-line technical comprehension**. This guide walks you through setting up your cloud or local environment, forking the repository safely, and shipping your daily Pull Requests through our **4-Gate Verification Pipeline**.
 
 ---
 
 ## 1. Development Environment Options
 
-We support two primary development environments. **If your machine has 4 GB RAM or freezes when running heavy software, use Option A (Codespaces).**
+We support three development environments. **If your laptop has 4 GB RAM or freezes when running heavy IDEs, always use Option A (GitHub Codespaces).**
 
 | Environment | Machine Requirement | Setup Effort | Recommended For |
 | :--- | :--- | :--- | :--- |
 | **Option A: GitHub Codespaces** | Any laptop (even 2–4 GB RAM), web browser only | **0 min** (Instant cloud VM) | **⭐ Recommended** (Zero laptop freezing) |
-| **Option B: Local Machine (SQLite)** | 4 GB+ RAM, .NET 10 SDK | **5 min** (No Docker needed) | Offline or local VS Code work |
+| **Option B: Local Machine (SQLite)** | 4 GB+ RAM, .NET 10 SDK / Python 3 | **5 min** (No Docker needed) | Offline or local VS Code work |
 | **Option C: Local Machine (Docker + Postgres)** | 8–16 GB RAM, Docker Desktop | **10 min** | Deep local DevOps practice |
 
 ---
 
-## 2. Project Isolation Strategy: Standalone Sandbox Repository
+## 2. Personal Fork & Multi-Student Isolation Strategy
 
-To protect production databases and allow you to learn, experiment, and break things safely, all internship engineering takes place in a **completely separate, dedicated repository**:
+Because students from **IIE Rosebank College (Pod Bravo)** and **Richfield Graduate Institute of Technology (Pod Alpha)** work concurrently across 5 specialization tracks, **every student works inside their own Personal GitHub Fork** of this sandbox repository:
 
-* **Repository URL:** `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git`
-* **Sandbox Solution:** `SputnikDevs.Residence.Sandbox.sln`
-* **API Project:** `SputnikDevs.Residence.SandboxApi/`
-* **Database Target:** Built-in SQLite (Default, zero setup) or Local PostgreSQL 16 container
+1. Open `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox` in your browser.
+2. Click the **Fork** button in the top-right corner to create `https://github.com/<your-github-username>/sputnikdevs-residence-sandbox`.
+3. Paste your Fork URL into your **Student WIL Portal** ([https://sputnikdevs.com/academy/portal](https://sputnikdevs.com/academy/portal)) when submitting your Day 1 check-in.
+4. Create feature branches inside your fork and open Pull Requests so automated CI checks and peer reviewers can inspect your diffs cleanly without overwriting another student's work.
 
 > [!IMPORTANT]
-> **Production Safety Guarantee:** 
-> The Sandbox repository is completely decoupled from the Sputnik Devs corporate web platform (`SputnikDevsCompanyWebApp`) and client eCommerce tiers. Interns are given contributor access **only** to this sandbox repository. It requires **zero production secrets** and has **zero access to live databases**. You can run migrations, drop tables, and experiment with zero risk to client workloads.
+> **Production Safety Guarantee:**  
+> This Sandbox repository is 100% isolated from Sputnik Devs Studio's commercial production servers and live client databases. It contains zero production secrets. You can run migrations, test SQL queries, train analytics models, and experiment safely.
 
 ---
 
-## 3. Step-by-Step Setup
+## 3. Step-by-Step Environment Setup
 
-### 🚀 Option A: GitHub Codespaces (Zero Setup, Zero Laptop Load — Recommended)
-
-This runs your entire development environment inside a high-speed Linux container in GitHub's cloud. It uses virtually zero RAM on your laptop (only a browser tab) and will completely prevent system freezes.
-
-> [!NOTE]
-> **Never used GitHub Codespaces before?**
-> You don't need to install anything on your laptop or inside Codespaces:
-> * **.NET 10 SDK:** Already pre-installed.
-> * **C# Dev Kit & VS Code:** Runs automatically inside your browser with all C# extensions ready.
-> * **Docker:** **NOT required.**
-> * **PostgreSQL:** **NOT required.** The sandbox uses built-in SQLite by default, which initializes and seeds automatically.
-
-1. In your browser, navigate to the repository:
-   👉 `https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox`
-2. Click the green **`<> Code`** button and select the **Codespaces** tab (or click the badge in `README.md`).
-3. Click **Create codespace on main**.
-4. A full VS Code editor will open right in your web browser. 
-5. In the built-in terminal (Press ``Ctrl + ` `` or **Terminal ➔ New Terminal**), start the API:
+### 🚀 Option A: GitHub Codespaces (Recommended)
+1. Navigate to your personal fork of `sputnikdevs-residence-sandbox` on GitHub.
+2. Click the green **`<> Code`** button ➔ **Codespaces** tab ➔ **Create codespace on main**.
+3. Wait ~30 seconds for VS Code in the browser to load.
+4. In the terminal (`` Ctrl + ` ``), verify the backend API runs:
    ```bash
    dotnet run --project SputnikDevs.Residence.SandboxApi
    ```
-6. VS Code will detect port `5035` and display a popup: *"Your application running on port 5035 is available. Open in Browser"*. Click it to immediately view the interactive **Swagger UI**!
-
----
-
-### 💻 Option B: Local Machine Setup with SQLite (Lightweight, No Docker)
-
-If you prefer to work locally on your laptop without Docker Desktop:
-
-1. **Install Prerequisites:**
-   - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-   - [Git](https://git-scm.com/)
-   - [VS Code](https://code.visualstudio.com/) with the **C# Dev Kit** extension.
-2. **Clone the repository:**
+5. Need PostgreSQL 16 inside Codespaces (for Track 01 Day 9+, Track 03 Database, or Track 04 Analytics)? Run:
    ```bash
-   git clone https://github.com/Sputnik-Devs-Pty-Ltd/sputnikdevs-residence-sandbox.git
-   cd sputnikdevs-residence-sandbox
+   ./scripts/start-postgres.sh
    ```
-3. **Build the solution:**
-   ```bash
-   dotnet build SputnikDevs.Residence.Sandbox.sln
-   ```
-4. **Run the API:**
-   ```bash
-   dotnet run --project SputnikDevs.Residence.SandboxApi
-   ```
-   *(The API defaults to SQLite, automatically generating and seeding `residence_sandbox.db` in seconds without running any heavy background containers).*
-5. Open your browser to:
-   👉 **`http://localhost:5035/`**
+   *(See [Codespaces PostgreSQL 16 Guide](CODESPACES_POSTGRES_GUIDE.md) for full details).*
 
----
-
-### 🐳 Option C: Local PostgreSQL with Docker (Optional for 8GB+ RAM Machines)
-
-If your machine has ample RAM (8 GB or more) and you want to practice with PostgreSQL:
-1. Edit `SputnikDevs.Residence.SandboxApi/appsettings.Development.json` and set:
-   ```json
-   "DatabaseProvider": "PostgreSQL"
-   ```
-2. Start the isolated PostgreSQL container:
-   ```bash
-   cd SputnikDevs.Residence.SandboxApi
-   docker compose up -d
-   ```
-3. Run the API:
-   ```bash
-   dotnet run
-   ```
-
----
-
-## 4. Git Branching & Workflow Rules
-
-We follow a strict, professional feature-branch workflow. **No developer commits directly to `main`.**
-
-### Branch Naming Convention
-All branches must follow this structure:
-```
-<type>/wil-<student_first_name>-<short-description>
-```
-
-**Examples:**
-* `feature/wil-brian-ticket-filtering`
-* `feature/wil-brian-room-occupancy-check`
-* `fix/wil-brian-null-technician-validation`
-* `test/wil-brian-tickets-controller-unit-tests`
-
-### Commit Message Format (Conventional Commits)
-Commits should be atomic and descriptive:
-```
-<type>(<scope>): <concise present-tense description>
-
-[optional body with reasoning]
-```
-
-**Allowed Types:**
-* `feat`: A new feature or endpoint.
-* `fix`: A bug fix.
-* `refactor`: Code restructuring without changing behavior.
-* `test`: Adding or updating tests.
-* `docs`: Documentation updates or logbook entries.
-
-**Example:**
+### 💻 Option B: Local Machine Setup (Lightweight SQLite)
 ```bash
-git commit -m "feat(tickets): add priority and category query filters to GET /api/v1/tickets"
+git clone https://github.com/<your-github-username>/sputnikdevs-residence-sandbox.git
+cd sputnikdevs-residence-sandbox
+dotnet build SputnikDevs.Residence.Sandbox.sln
+dotnet run --project SputnikDevs.Residence.SandboxApi
+```
+Open **`http://localhost:5035/`** to access Swagger UI.
+
+---
+
+## 4. Branch Naming & Commit Conventions
+
+**Never commit directly to `main`.** Every daily milestone (Days 1–19) must be completed on its own dedicated feature branch:
+
+### Branch Naming Standard
+```text
+wil/<college>-<first_name>/day-<XX>-<short-topic>
+```
+**Examples:**
+* `wil/rosebank-brian/day-04-tickets-filtering`
+* `wil/richfield-thabo/day-06-frontend-ticket-modal`
+* `wil/rosebank-lerato/day-08-postgres-indexing-views`
+* `wil/richfield-sipho/day-11-pandas-sla-telemetry`
+* `wil/rosebank-naledi/day-14-ai-ticket-triage-classifier`
+
+### Conventional Commit Format
+```bash
+git commit -m "feat(day-04): add status and priority query filtering to tickets endpoint"
 ```
 
 ---
 
-## 5. Pull Request (PR) & Code Review Standards
+## 5. The 4-Gate Daily Verification Pipeline
 
-### Before Submitting a PR:
-1. Ensure the code compiles with **0 errors and 0 warnings**: `dotnet build`
-2. Run any tests: `dotnet test`
-3. Verify formatting and remove unused `using` directives.
-4. Review your own diff (`git diff main`) to catch stray comments or temporary debug logs.
+Every daily milestone progresses through 4 structured quality gates before your hours are credited toward graduation:
 
-### PR Description Template:
-Every PR must include:
-```markdown
-## Summary of Changes
-- Implemented filtering on GET /api/v1/tickets by Status and Priority.
-- Added input validation ensuring StudentId and RoomId exist before creating a ticket.
-
-## Testing Performed
-- [x] Verified via Swagger UI: POST /api/v1/tickets with invalid RoomId returns 400 Bad Request.
-- [x] Verified GET /api/v1/tickets?status=Assigned filters correctly.
-
-## Learning Reflection
-- Practiced LINQ conditional filtering using `IQueryable<T>`.
-```
-
-### Code Review Expectations
-- A mentor will review your PR within 24 hours.
-- Feedback is an opportunity to learn enterprise best practices. Never take critique personally.
-- Once approved, your mentor will merge your PR into the development branch.
-
----
-
-## 6. Communication & Getting Help
-
-- **Daily Check-In:** Post your standup in the Telegram/Slack channel by **09:30 AM** daily.
-- **The 30-Minute Rule:** If you are stuck on a technical blocker for more than 30 minutes:
-  1. Read the error stack trace carefully.
-  2. Consult Microsoft .NET documentation.
-  3. Formulate a specific question: *"Here is what I am trying to achieve, here is the error, and here are the two approaches I tried."*
-  4. Post in the channel for mentor guidance.
+1. **Gate 1 — Automated CI & Build Check:**
+   Your Pull Request must compile cleanly (`0 errors`) and include proof of execution (Swagger JSON response, UI screenshot, SQL `EXPLAIN ANALYZE` output, or notebook chart).
+2. **Gate 2 — Peer Student / Stage 3 TA Code Review:**
+   Another student in your Pod (or a Stage 3 Senior WIL Associate) reviews your PR diff, tests your implementation, and leaves structured review comments. You must log the reviewer's name in your daily portal check-in.
+3. **Gate 3 — Pod Coordinator Oral Defense Check (Kenneth or Prince):**
+   Log into [https://sputnikdevs.com/academy/portal](https://sputnikdevs.com/academy/portal) and submit your Daily Check-In + PR URL. During standup or PR review, your Pod Coordinator (**Kenneth Katsande** for Pod Alpha / Richfield; **Prince Nkiwane** for Pod Bravo / Rosebank) will ask you **2 Oral Defense Questions** about why your code works.
+   * **Score `3/4` or `4/4`:** Passes Gate 3 and advances to Principal Engineer sign-off.
+   * **Score `1/4` or `2/4`:** Returned (`Revision Required`) so you can study the lines you generated and re-explain them clearly.
+4. **Gate 4 — Principal Engineer Batch Sign-Off (Takudzwa Mupanesure):**
+   Once Gate 3 is passed, Principal Engineer **Takudzwa Mupanesure** performs architectural sign-off and credits your official WIL hours toward your Certificate and Academic Transcript.
