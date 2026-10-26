@@ -90,14 +90,15 @@ public class StudentsController : ControllerBase
         if (dto.RoomId.HasValue)
         {
             room = await _context.Rooms
-                 .FirstOrDefaultAsync(r => r.Id == dto.RoomId);
+                 .Include(r => r.Students)
+                 .FirstOrDefaultAsync(r => r.Id == dto.RoomId.Value);
 
             if (room is null)
             {
                 return BadRequest(new
                 {
                     message = $"Room '{dto.RoomId}' does not exist."
-                }
+                });
             }
 
             if (room.AvailableSpots <= 0)

@@ -1,23 +1,24 @@
-name: .NET API CI
+name: .NET 10 API CI & Endpoint Smoke Verifier
 
 on:
   push:
     branches:
       - main
       - 'feature/**'
+      - 'docs/**'
   pull_request:
     branches:
       - main
 
 jobs:
-  build:
+  build-and-verify:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up .NET
+      - name: Set up .NET 10
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -25,5 +26,27 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj
 
-      - name: Build API
+      - name: Build API (Release)
         run: dotnet build SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj --configuration Release --no-restore
+
+      - name: Run Automated API Runtime & Endpoint Smoke Test
+        run: |
+          dotnet run --project SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj --configuration Release --no-build --urls "http://127.0.0.1:5035" &
+          API_PID=$!
+          for i in $(seq 1 20); do
+            if curl -sf http://127.0.0.1:5035/api/v1/rooms > /dev/null; then
+              echo "✅ Sandbox API started on http://127.0.0.1:5035"
+              break
+            fi
+            sleep 1
+          done
+          echo "=== GET /api/v1/rooms ==="
+          curl -sf http://127.0.0.1:5035/api/v1/rooms | head -c 500
+          echo ""
+          echo "=== GET /api/v1/students ==="
+          curl -sf http://127.0.0.1:5035/api/v1/students | head -c 500
+          echo ""
+          echo "=== GET /api/v1/tickets ==="
+          curl -sf http://127.0.0.1:5035/api/v1/tickets | head -c 500
+          echo ""
+          kill $API_PID || true
