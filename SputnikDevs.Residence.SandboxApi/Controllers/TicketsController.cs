@@ -180,18 +180,40 @@ public class TicketsController : ControllerBase
     [HttpPost("{id:guid}/comments")]
     [ProducesResponseType(typeof(TicketCommentDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<TicketCommentDto>> AddComment(Guid id, [FromBody] AddTicketCommentDto dto)
     {
-        var ticketExists = await _context.MaintenanceTickets.AnyAsync(t => t.Id == id);
-        if (!ticketExists)
+        // Retrieve the full entity from the database
+        var ticket = await _context.MaintenanceTickets.FirstOrDefaultAsync(t => t.Id == id);
+
+        // Perform the null check
+        if (ticket == null)
             return NotFound(new { message = $"Ticket with ID '{id}' was not found." });
+
+        // Clean and safely extract the values inline
+        string cleanAuthorName = dto.AuthorName?.Trim() ?? string.Empty;
+        string cleanAuthorRole = dto.AuthorRole?.Trim() ?? string.Empty;
+        string cleanContent = dto.Content?.Trim() ?? string.Empty;
+
+        if (new[] { cleanAuthorName, cleanAuthorRole, cleanContent }.Any(string.IsNullOrEmpty))
+            return BadRequest("Author name, author role or content cannot be empty.");
+
+        // Perform the status check
+        if (ticket.Status == TicketStatus.Closed)
+            return BadRequest("Closed tickets cannot receive new comments.");
+
+        List<string> roles = new() { "Student", "Technician", "Admin" };        
+
+        // Check for valid author role
+        if (!roles.Contains(cleanAuthorRole, StringComparer.OrdinalIgnoreCase))
+                return BadRequest("Invalid author role. Allowed roles are Student, Technician, and Admin.");
 
         var comment = new TicketComment
         {
             TicketId = id,
-            AuthorName = dto.AuthorName.Trim(),
-            AuthorRole = dto.AuthorRole.Trim(),
-            Content = dto.Content.Trim(),
+            AuthorName = cleanAuthorName,
+            AuthorRole = cleanAuthorRole,
+            Content = cleanContent,
             CreatedAtUtc = DateTime.UtcNow
         };
 
