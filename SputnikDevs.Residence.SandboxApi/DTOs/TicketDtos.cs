@@ -68,7 +68,7 @@ public record CreateMaintenanceTicketDto(
 /// <param name="AssignedTechnician"></param>
 /// <param name="ResolutionNotes"></param>
 public record UpdateTicketStatusDto(
-    [Required] TicketStatus Status,
+    [Required] [EnumDataType(typeof(TicketStatus))] TicketStatus Status,
     [MaxLength(100)] string? AssignedTechnician,
     [MaxLength(2000)] string? ResolutionNotes
 );
