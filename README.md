@@ -48,17 +48,18 @@ To ensure every student receives daily support and structured feedback, cohorts 
 
 ---
 
-## 🧭 5 Specialization Tracks on One Unified Codebase
+## 🧭 6 Specialization Tracks on One Unified Polyglot Monorepo
 
-Students from different academic streams work on the **same Student Residence Sandbox domain** (`Rooms`, `Students`, `MaintenanceTickets`) through specialized engineering tracks:
+Students from different academic streams work on the **same Student Residence Sandbox business domain** (`Rooms`, `Students`, `MaintenanceTickets`, `VisitorGatePasses`, `Billing`) through 6 specialized engineering tracks:
 
-| Track Code | Specialization Track | Primary Tech Stack | Workspace Folder | Track Syllabus |
-| :--- | :--- | :--- | :--- | :--- |
-| **Track 01** | **Backend & Cloud API Engineering** | C# 12, ASP.NET Core Web API (.NET 10), EF Core, PostgreSQL 16, xUnit | `SputnikDevs.Residence.SandboxApi/` | **[TRACK_01_BACKEND.md](docs/tracks/TRACK_01_BACKEND.md)** |
-| **Track 02** | **Frontend & Modern Web UI Engineering** | HTML5, Tailwind/Bootstrap 5, Modern JS (`fetch`), Razor/Blazor UI | `frontend/` | **[TRACK_02_FRONTEND_UI.md](docs/tracks/TRACK_02_FRONTEND_UI.md)** |
-| **Track 03** | **Database Administration & Data Engineering** | PostgreSQL 16, DDL Constraints, Composite Indexes, SQL Views, CSV ETL | `database/` | **[TRACK_03_DATABASE_SQL.md](docs/tracks/TRACK_03_DATABASE_SQL.md)** |
-| **Track 04** | **Big Data, BI & Data Science** | Python 3, Pandas, SQL Analytics, SLA Telemetry, Executive KPI Dashboards | `analytics/` | **[TRACK_04_BIG_DATA_BI.md](docs/tracks/TRACK_04_BIG_DATA_BI.md)** |
-| **Track 05** | **Applied AI & Intelligent Automation** | Python/C# NLP Ticket Triage, Sentiment Analysis, RAG FAQ Assistant | `ai-agents/` | **[TRACK_05_APPLIED_AI.md](docs/tracks/TRACK_05_APPLIED_AI.md)** |
+| Track Code | Module Codes | Specialization Track | Primary Tech Stack | Workspace Folder | Track Syllabus |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Track 01** | `SD-BE-101..104` | **Backend & Cloud API Engineering** | C# 12, ASP.NET Core Web API (.NET 10), EF Core, PostgreSQL 16, xUnit | `SputnikDevs.Residence.SandboxApi/` | **[TRACK_01_BACKEND.md](docs/tracks/TRACK_01_BACKEND.md)** |
+| **Track 02** | `SD-FE-101..104` | **Modern Web & SaaS UI Engineering** | **Angular 19+ SPA** (TypeScript, Signals, RxJS) or **Blazor / Razor**, Tailwind CSS | `frontend/web-angular/` & `frontend/web-blazor-razor/` | **[TRACK_02_FRONTEND_UI.md](docs/tracks/TRACK_02_FRONTEND_UI.md)** |
+| **Track 03** | `SD-DB-101..104` | **Database Administration & Data Engineering** | PostgreSQL 16, 3NF DDL Constraints, Composite Indexes, SQL Views, CSV ETL | `database/` | **[TRACK_03_DATABASE_SQL.md](docs/tracks/TRACK_03_DATABASE_SQL.md)** |
+| **Track 04** | `SD-DS-101..104` | **Big Data, BI & Data Science** *(MSc Led)* | Python 3, Pandas, NumPy, Scikit-Learn, SLA Telemetry, Executive KPI Dashboards | `analytics/` | **[TRACK_04_BIG_DATA_BI.md](docs/tracks/TRACK_04_BIG_DATA_BI.md)** |
+| **Track 05** | `SD-AI-101..104` | **Applied AI & Intelligent Automation** *(MSc Led)* | Python/C# NLP Ticket Triage, Sentiment Analysis, RAG Residence Policy Assistant | `ai-agents/` | **[TRACK_05_APPLIED_AI.md](docs/tracks/TRACK_05_APPLIED_AI.md)** |
+| **Track 06** | `SD-MB-101..104` | **Mobile & Cross-Platform Apps** | **Flutter 3.x & Dart 3** or **.NET 10 MAUI**, Offline SQLite Sync, QR Gate Pass | `mobile/mobile-flutter/` & `mobile/mobile-maui/` | **[TRACK_06_MOBILE_FLUTTER_MAUI.md](docs/tracks/TRACK_06_MOBILE_FLUTTER_MAUI.md)** |
 
 ---
 

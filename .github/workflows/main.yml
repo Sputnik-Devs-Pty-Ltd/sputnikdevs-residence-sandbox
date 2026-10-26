@@ -1,10 +1,11 @@
-name: .NET 10 API CI & Endpoint Smoke Verifier
+name: Polyglot WIL Sandbox CI (.NET 10, Angular, Flutter, SQL, Data & AI)
 
 on:
   push:
     branches:
       - main
       - 'feature/**'
+      - 'feat/**'
       - 'docs/**'
   pull_request:
     branches:
@@ -23,10 +24,10 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Restore dependencies
+      - name: Restore .NET API dependencies
         run: dotnet restore SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj
 
-      - name: Build API (Release)
+      - name: Build .NET 10 API (Release)
         run: dotnet build SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj --configuration Release --no-restore
 
       - name: Run Automated API Runtime & Endpoint Smoke Test
@@ -50,3 +51,15 @@ jobs:
           curl -sf http://127.0.0.1:5035/api/v1/tickets | head -c 500
           echo ""
           kill $API_PID || true
+
+      - name: Verify Polyglot Track Workspaces (Angular, Flutter, SQL, Data & AI)
+        run: |
+          echo "✅ Verifying Track 02 (Angular & Blazor) workspace..."
+          test -f frontend/web-angular/package.json
+          test -f frontend/web-angular/src/app/services/residence-api.service.ts
+          echo "✅ Verifying Track 06 (Flutter & .NET MAUI) workspace..."
+          test -f mobile/mobile-flutter/pubspec.yaml
+          test -f mobile/mobile-flutter/lib/services/sandbox_api_client.dart
+          echo "✅ Verifying Track 03/04/05 (Database, Analytics, AI) workspaces..."
+          test -d database && test -d analytics && test -d ai-agents
+          echo "✅ All 6 Polyglot WIL Track workspaces verified!"
