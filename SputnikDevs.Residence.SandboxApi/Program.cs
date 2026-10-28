@@ -14,7 +14,7 @@ builder.Services.AddControllers()
         {
             var firstError = context.ModelState
                 .Values
-                .SelectMany(values => value.Errors)
+                .SelectMany(values => values.Errors)
                 .Select(error => error.ErrorMessage)
                 .FirstOrDefault();
             
