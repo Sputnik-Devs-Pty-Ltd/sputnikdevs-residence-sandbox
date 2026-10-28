@@ -4,7 +4,7 @@
 * **Institution:** Richfield Graduate Institute of Technology
 * **Cohort Pod:** Pod Alpha — Richfield Graduate Institute Cohort (`POD-A-RICHFIELD`)
 * **Program:** Work-Integrated Learning (WIL) / Software Development Placement
-* **Pod Alpha Director:** Kenneth Takudzwa Katsande (`[KK]` · `@Kennethtakudzwa`)
+* **Pod Alpha Director:** Kenneth Takudzwa Katsande (`[KK]` · `@Katsande-Kenneth`)
 * **Principal Architect:** Takudzwa Mupanesure (`[TM]` · `@Takudzwamz`)
 
 ---
@@ -39,7 +39,7 @@ Every morning, post your standup in the dedicated WIL Portal / studio channel us
 
 * **Daily Dual-Verification Protocol (Effective Day 11 — 2026-10-27):**
   - **Days 01–10:** Reviewed and signed off directly by Principal Architect Takudzwa Mupanesure (`[TM]`).
-  - **Day 11–19 (Pod Alpha — Richfield):** Dual-Verified by Pod Alpha Director Kenneth Takudzwa Katsande (`[KK]` · `@Kennethtakudzwa`) and co-signed by Principal Architect Takudzwa Mupanesure (`[TM]` · `@Takudzwamz`) (`Dual-Verified [KK / TM]`).
+  - **Day 11–19 (Pod Alpha — Richfield):** Dual-Verified by Pod Alpha Director Kenneth Takudzwa Katsande (`[KK]` · `@Katsande-Kenneth`) and co-signed by Principal Architect Takudzwa Mupanesure (`[TM]` · `@Takudzwamz`) (`Dual-Verified [KK / TM]`).
 * **Weekly Walkthrough:** Every Friday afternoon (15:00 – 15:45 SAST).
 
 ---
@@ -67,7 +67,7 @@ Every morning, post your standup in the dedicated WIL Portal / studio channel us
 | **09** | 2026-10-23 | 8h | Model Validation & Error Handling | Added request validation for ticket status and student room assignment, including room existence and eager-loaded room capacity (`AvailableSpots`) checks. Configured `.github/workflows/main.yml` .NET 10 CI & automated API smoke test workflow. | `PR #10` | Approved [TM] |
 | **10** | 2026-10-26 | 8h | Mid-Term Review & Status Workflow | Implemented `PATCH /api/v1/tickets/{id}/status` status enum validation and `ResolvedAtUtc` timestamp refresh/reset on status transitions. Completed Day 10 Formative Code Review with Principal Architect. | `PR #11` | Approved [TM] |
 | **11** | 2026-10-27 | 8h | Ticket Comment Threading | Hardened `POST /api/v1/tickets/{id}/comments` in `TicketsController` with trimmed `AuthorName`, `AuthorRole`, and `Body` normalization plus explicit UTC `CreatedAtUtc` timestamping. Passed Day 11 Architecture Defense (4.0/4.0) under Pod Alpha Dual-Verification review. | `Commit 594a712 / PR #12` | Dual-Verified [KK / TM] |
-| **12** | 2026-10-28 | 8h | Ticket Comment Validation Polish | Refined ticket comment validation by standardizing JSON error responses and normalizing author roles to canonical casing. Added no-tracking retrieval for ticket status checks and validated the changes through API testing. | `PR #13` | Pending Dual-Verification [KK / TM] |
+| **12** | 2026-10-28 | 8h | Advanced Query Filtering & Comment Validation Polish | Implement optional query-string filtering (`status`, `category`, `priority`, `roomId`) on `GET /api/v1/tickets` (Issue #13) and merge canonical `AllowedRoles` + JSON error polish on `POST /api/v1/tickets/{id}/comments`. Sync PR & complete 3-Min Timed Code Defense on Sputnik Devs WIL Portal (`SD-PORTAL-BRIAN`). | `Issue #13 · Pending PR #15` | Pending Dual-Verification [KK / TM] |
 | **13** | Scheduled | 8h | Students & Rooms CRUD Completion | Complete `StudentsController` and `RoomsController` write/filter endpoints and live room occupancy calculation. | `Scheduled` | Pending Dual-Verification [KK / TM] |
 | **14** | Scheduled | 8h | Cross-Origin (CORS) & OpenAPI Polish | Configure CORS policy for frontend consumption and JSON string enum converters for OpenAPI developer experience. | `Scheduled` | Pending Dual-Verification [KK / TM] |
 | **15** | Scheduled | 8h | Unit Testing Foundations | Initialize xUnit test project `SputnikDevs.Residence.SandboxApi.Tests` and write unit tests for DTO validations and domain model constraints. | `Scheduled` | Pending Dual-Verification [KK / TM] |
@@ -82,6 +82,6 @@ Every morning, post your standup in the dedicated WIL Portal / studio channel us
 
 **Total Hours Logged to Date:** 88 / 152 Hours (Days 01–11 Verified)  
 **Student Signature:** Brian Mkandla  
-**Pod Alpha Director (Day 11+ Dual-Verification):** Kenneth Takudzwa Katsande (`@Kennethtakudzwa`)  
+**Pod Alpha Director (Day 11+ Dual-Verification):** Kenneth Takudzwa Katsande (`@Katsande-Kenneth`)  
 **Principal Architect Sign-Off:** Takudzwa Mupanesure (`@Takudzwamz`)  
 *(Sputnik Devs Studio (Pty) Ltd • Official Digital Seal — `SD-PORTAL-BRIAN`)*
