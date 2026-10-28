@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi;
 using SputnikDevs.Residence.SandboxApi.Data;
 
@@ -7,6 +8,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Controller & JSON Configuration
 builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            var firstError = context.ModelState
+                .Values
+                .SelectMany(values => values.Errors)
+                .Select(error => error.ErrorMessage)
+                .FirstOrDefault();
+            
+            return new BadRequestObjectResult(new
+            {
+                message = firstError ?? "Invalid query parameter value."
+            });
+        };
+    })
     .AddJsonOptions(options =>
     {
         // Serialize enums as human-readable strings (e.g. "Plumbing", "Open", "Emergency")

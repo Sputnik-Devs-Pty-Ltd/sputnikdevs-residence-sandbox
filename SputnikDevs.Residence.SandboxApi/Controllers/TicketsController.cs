@@ -24,7 +24,8 @@ public class TicketsController : ControllerBase
     }
 
     /// <summary>
-    /// List all maintenance tickets with optional status, priority, category, or room filtering.
+    /// List all maintenance tickets with optional status, priority, category, or 
+    /// room and student filtering with keyword search.
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<MaintenanceTicketDto>), StatusCodes.Status200OK)]
@@ -32,8 +33,30 @@ public class TicketsController : ControllerBase
         [FromQuery] TicketStatus? status = null,
         [FromQuery] TicketPriority? priority = null,
         [FromQuery] TicketCategory? category = null,
-        [FromQuery] Guid? roomId = null)
+        [FromQuery] Guid? roomId = null,
+        [FromQuery] Guid? studentId = null,
+        [FromQuery] string? search = null)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(new { message = "Invalid status, priority or category filter values." });
+        }
+
+        if (status.HasValue && !Enum.IsDefined(typeof(TicketStatus), status.Value))
+        {
+            return BadRequest(new { message = "Invalid status filter value." });
+        }
+
+        if (priority.HasValue && !Enum.IsDefined(typeof(TicketPriority), priority.Value))
+        {
+            return BadRequest(new { message = "Invalid priority filter value." });
+        }
+
+        if (category.HasValue && !Enum.IsDefined(typeof(TicketCategory), category.Value))
+        {
+            return BadRequest(new { message = "Invalid category filter value." });
+        }
+
         var query = _context.MaintenanceTickets
             .Include(t => t.Student)
             .Include(t => t.Room)
@@ -51,6 +74,17 @@ public class TicketsController : ControllerBase
 
         if (roomId.HasValue)
             query = query.Where(t => t.RoomId == roomId.Value);
+
+        if (studentId.HasValue)
+            query = query.Where(t => t.StudentId == studentId.Value);
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var keyword = search.Trim().ToLower();
+            query = query.Where(t => 
+                t.Title.ToLower().Contains(keyword) || 
+                t.Description.ToLower().Contains(keyword));
+        }
 
         var tickets = await query
             .OrderByDescending(t => t.CreatedAtUtc)
