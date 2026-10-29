@@ -65,41 +65,39 @@ public class TicketsController : ControllerBase
     /// Every status and priority is included, with a count of 0 when no tickets match.
     /// </summary>
     [HttpGet("summary")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetSummary()
     {
-        // Ask the datanase for counts per status
         var statusCounts = await _context.MaintenanceTickets
             .AsNoTracking()
             .GroupBy(t => t.Status)
             .Select(g => new { Status = g.Key, Count = g.Count() })
             .ToDictionaryAsync(x => x.Status, x => x.Count);
-
+    
         var priorityCounts = await _context.MaintenanceTickets
             .AsNoTracking()
             .GroupBy(t => t.Priority)
             .Select(g => new { Priority = g.Key, Count = g.Count() })
             .ToDictionaryAsync(x => x.Priority, x => x.Count);
-
+    
         var byStatus = new Dictionary<string, int>();
-        foreach (TicketStatus status in Enum.GetValue<TicketStatus>())
+        foreach (TicketStatus status in Enum.GetValues<TicketStatus>())
         {
             byStatus[status.ToString()] = statusCounts.TryGetValue(status, out int count) ? count : 0;
         }
-
+    
         var byPriority = new Dictionary<string, int>();
         foreach (TicketPriority priority in Enum.GetValues<TicketPriority>())
         {
-            byPriority[priority.ToString()] = priorityCounts.TryGetValues(priority, out int count) ? count : 0;
+            byPriority[priority.ToString()] = priorityCounts.TryGetValue(priority, out int count) ? count : 0;
         }
-
-        return Ok(new 
+    
+        return Ok(new
         {
             total = byStatus.Values.Sum(),
             byStatus,
             byPriority
         });
-    }
+}
 
     /// <summary>
     /// Get a single ticket by its unique ID.
