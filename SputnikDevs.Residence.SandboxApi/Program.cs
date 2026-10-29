@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using SputnikDevs.Residence.SandboxApi.Data;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Controller & JSON Configuration
@@ -53,9 +55,9 @@ builder.Services.AddSwaggerGen(options =>
 // 4. CORS (Allow local frontend/mobile dev)
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy(MyAllowSpecificOrigins, policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -93,7 +95,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Swagger UI at root URL (http://localhost:5000/)
 });
 
-app.UseCors();
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 app.MapControllers();
 
