@@ -82,7 +82,7 @@ public class TicketsController : ControllerBase
             .ToDictionaryAsync(x => x.Priority, x => x.Count);
 
         var byStatus = new Dictionary<string, int>();
-        foreach (TicketStatus status in Enum.GetValues<TicketStatus>())
+        foreach (TicketStatus status in Enum.GetValue<TicketStatus>())
         {
             byStatus[status.ToString()] = statusCounts.TryGetValue(status, out int count) ? count : 0;
         }
