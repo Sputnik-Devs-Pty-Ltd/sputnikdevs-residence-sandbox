@@ -55,7 +55,7 @@ builder.Services.AddSwaggerGen(options =>
 // 4. CORS (Allow local frontend/mobile dev)
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(MyAllowSpecificOrigins, policy =>
+    options.AddPolicy(MyAllowSpecificOrigins, policy =>
     {
         policy.WithOrigins("http://localhost:3000")
               .AllowAnyHeader()
