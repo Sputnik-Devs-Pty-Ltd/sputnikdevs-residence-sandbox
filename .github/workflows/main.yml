@@ -24,11 +24,14 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Restore .NET API dependencies
-        run: dotnet restore SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj
+      - name: Restore .NET API and test dependencies
+        run: dotnet restore SputnikResidence.Tests/SputnikResidence.Tests.csproj
 
       - name: Build .NET 10 API (Release)
         run: dotnet build SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj --configuration Release --no-restore
+
+      - name: Run xUnit Unit Tests
+        run: dotnet test SputnikResidence.Tests/SputnikResidence.Tests.csproj --configuration Release --no-restore --verbosity normal
 
       - name: Run Automated API Runtime & Endpoint Smoke Test
         run: |
