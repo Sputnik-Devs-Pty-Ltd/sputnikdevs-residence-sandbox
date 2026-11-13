@@ -1,0 +1,14 @@
+
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+.git/
+.github/
+.vs/
+TestResults/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
