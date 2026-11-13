@@ -24,11 +24,14 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Restore .NET API dependencies
-        run: dotnet restore SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj
+      - name: Restore .NET API and test dependencies
+        run: dotnet restore SputnikResidence.Tests/SputnikResidence.Tests.csproj
 
       - name: Build .NET 10 API (Release)
         run: dotnet build SputnikDevs.Residence.SandboxApi/SputnikDevs.Residence.SandboxApi.csproj --configuration Release --no-restore
+
+      - name: Run xUnit Unit Tests
+        run: dotnet test SputnikResidence.Tests/SputnikResidence.Tests.csproj --configuration Release --no-restore --verbosity normal
 
       - name: Run Automated API Runtime & Endpoint Smoke Test
         run: |
@@ -51,6 +54,38 @@ jobs:
           curl -sf http://127.0.0.1:5035/api/v1/tickets | head -c 500
           echo ""
           kill $API_PID || true
+
+      - name: Build .NET 10 API Docker Image
+        run: docker build --tag sputnik-residence-api:day17 .
+
+      - name: Run Docker Container and Verify Health Endpoint
+        run: |
+          docker run --detach --name residence-api --publish 8080:8080 sputnik-residence-api:day17
+
+          for i in $(seq 1 30); do
+            STATUS=$(curl --silent --output health-response.txt --write-out "%{http_code}" http://localhost:8080/health || true)
+
+            if [ "$STATUS" = "200" ]; then
+              break
+            fi
+
+            sleep 2
+          done
+
+          if [ "$STATUS" != "200" ]; then
+            echo "Health endpoint did not return HTTP 200."
+            docker logs residence-api
+            exit 1
+          fi
+
+          echo "=== Health Endpoint Response ==="
+          cat health-response.txt
+
+          grep -qx "Healthy" health-response.txt
+
+          echo "Docker container health check passed!"
+
+          docker stop residence-api
 
       - name: Verify Polyglot Track Workspaces (Angular, Flutter, SQL, Data & AI)
         run: |

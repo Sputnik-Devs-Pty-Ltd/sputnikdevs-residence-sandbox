@@ -52,7 +52,10 @@ builder.Services.AddDbContext<SandboxDbContext>(options =>
     }
 });
 
-// 3. Swagger / OpenAPI Documentation
+// 3. Health Checks
+builder.Services.AddHealthChecks();
+
+// 4. Swagger / OpenAPI Documentation
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -69,7 +72,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// 4. CORS (Allow local frontend/mobile dev)
+// 5. CORS (Allow local frontend/mobile dev)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins, policy =>
@@ -82,7 +85,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// 5. Database Auto-Migration & Seeding on Startup
+// 6. Database Auto-Migration & Seeding on Startup
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<SandboxDbContext>();
@@ -99,7 +102,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// 6. HTTP Pipeline
+// 7. HTTP Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -115,5 +118,6 @@ app.UseSwaggerUI(c =>
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
